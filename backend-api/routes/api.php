@@ -1,15 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');
 
-Route::get('/users', function (Request $request) {
-    return response()->json([
-        'status' => true,
-        'message' => 'Usuários recuperados com sucesso',
-    ]);
-});
+//Listar usuarios
+Route::get('/users', [UserController::class, 'index']); //GET - http://127.0.0.1:8000/api/users?page=1
+
+//Visualizar ususario
+Route::get('/users/{id}', [UserController::class, 'show']); //GET - http://127.0.0.1:8000/api/users/1
