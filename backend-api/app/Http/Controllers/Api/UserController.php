@@ -34,7 +34,7 @@ class UserController extends Controller
         if (!$user) {
             return response()->json([
                 'status' => false,
-                'message' => 'Usuario não encontrado',
+                'message' => 'Usuario não encontrado ou inexistente',
                 
             ]);
         }
