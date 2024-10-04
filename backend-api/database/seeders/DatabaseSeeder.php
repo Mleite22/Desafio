@@ -14,17 +14,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         
-        // $this->call([
-        //     UserSeeder::class,
-        // ]);
+        $this->call([
+            UserSeeder::class,
+        ]);
 
-        // $this->call([
-        //     ModCursoSeeder::class
-        // ]);
+        $this->call([
+            ModCursoSeeder::class
+        ]);
        
-        // $this->call([
-        //     Curso_Seeder::class
-        // ]);
+        $this->call([
+            Curso_Seeder::class
+        ]);
         
         $this->call([
             CursoAlunoSeeder::class

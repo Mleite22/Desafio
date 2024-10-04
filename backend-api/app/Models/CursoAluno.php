@@ -12,6 +12,6 @@ class CursoAluno extends Model
     protected $fillable = [
         'nome_curso',
         'descricao_curso',
-        'modcurso_id',
+        // 'modcurso_id',
     ];
 }

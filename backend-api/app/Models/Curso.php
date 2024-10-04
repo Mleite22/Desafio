@@ -15,4 +15,9 @@ class Curso extends Model
         'modcurso_id',
 
     ];
+
+    public function modcurso()
+    {
+        return $this->belongsTo(ModalCurso::class);
+    }
 }

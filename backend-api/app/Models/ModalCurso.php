@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ModalCurso extends Model
 {
     use HasFactory;
+    protected $table = 'modcurso';
+    protected $fillable = ['nome'];
+    
 }
