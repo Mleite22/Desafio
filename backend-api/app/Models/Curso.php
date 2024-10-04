@@ -18,6 +18,6 @@ class Curso extends Model
 
     public function modcurso()
     {
-        return $this->belongsTo(ModalCurso::class);
+        return $this->belongsTo(ModalCurso::class, 'modcurso_id');
     }
 }

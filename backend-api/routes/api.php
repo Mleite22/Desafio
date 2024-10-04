@@ -27,3 +27,6 @@ Route::get('/curso', [CursoController::class, 'index']); //GET - http://127.0.0.
 
 //Visualizar Curso
 Route::get('/curso/{id}', [CursoController::class, 'show']); //GET - http://127.0.0.1:8000/api/curso/1
+
+//Cadastrar Curso
+Route::post('/curso', [CursoController::class, 'store']); //POST - http://127.0.0.1:8000/api/curso

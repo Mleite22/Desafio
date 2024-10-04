@@ -13,14 +13,22 @@ class CursoController extends Controller
     public function index(): JsonResponse
     {
         //Recuperando curso do banco
-        $curso = Curso::orderBy('id', 'Asc')->paginate(2);
+        $curso = Curso::with('modcurso')->orderBy('id', 'Asc')->paginate(2);
         //Recuperando modalidade do curso do banco
-        $modalidade = ModalCurso::all();
+        // $modalidade = ModalCurso::all();
+        $formattedCursos = $curso->map(function($curso){
+            return [
+                'id' => $curso->id,
+                'nome' => $curso->nome_curso,
+                'descricao' => $curso->descricao_curso,
+                'modalidade' => $curso->modcurso->nome,                                
+            ];
+        });
+
         //Retorna os cursos
         return response()->json([
             'status' => true,
-            'curso' => $curso,
-            'nome' => $modalidade,
+            'curso' => $formattedCursos,
         ], 200);
     }
 
@@ -28,9 +36,7 @@ class CursoController extends Controller
     public function show($id): JsonResponse
     {
         //Recuperando curso do banco
-        $curso = Curso::find($id);
-        //Recuperando modalidade do curso do banco
-        $modalidade = ModalCurso::find($id);
+        $curso = Curso::with('modcurso')->find($id);        
         //Verificando se o curso existe
         if (!$curso) {
             return response()->json([
@@ -41,8 +47,12 @@ class CursoController extends Controller
         //Retorna o curso
         return response()->json([
             'status' => true,
-            'curso' => $curso,
-            'nome' => $modalidade,
+            'curso' => [
+                'id' => $curso->id,
+                'nome' => $curso->nome_curso,
+                'descricao' => $curso->descricao_curso,
+                'modalidade' => $curso->modcurso->nome, 
+            ]
 
         ], 200);
     }
