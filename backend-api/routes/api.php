@@ -30,3 +30,11 @@ Route::get('/curso/{id}', [CursoController::class, 'show']); //GET - http://127.
 
 //Cadastrar Curso
 Route::post('/curso', [CursoController::class, 'store']); //POST - http://127.0.0.1:8000/api/curso
+
+//Editar Curso
+Route::put('/curso/{id}', [CursoController::class, 'update']); //PUT - http://127.0.0.1:8000/api/curso/1
+
+//Deletar curso
+Route::delete('/curso/{id}', [CursoController::class, 'destroy']); //DELETE - http://127.0.0.1:8000/api/curso/1
+
+//Rota cursoaluno
