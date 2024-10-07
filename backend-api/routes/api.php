@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CursoAlunoController;
 use App\Http\Controllers\Api\CursoController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -37,4 +38,6 @@ Route::put('/curso/{id}', [CursoController::class, 'update']); //PUT - http://12
 //Deletar curso
 Route::delete('/curso/{id}', [CursoController::class, 'destroy']); //DELETE - http://127.0.0.1:8000/api/curso/1
 
+
 //Rota cursoaluno
+Route::get('/cursoaluno', [CursoAlunoController::class, 'index']); //GET - http://127.0.0.1:800/api/cursoaluno
