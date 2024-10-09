@@ -32,9 +32,11 @@
       </label>
       <button type="submit">Cadastrar</button>
     </form>
+
     <div v-if="error" class="error">
       <p>{{ error }}</p>
     </div>
+
   </div>
 
 </template>
@@ -42,7 +44,7 @@
 <script>
 import axios from 'axios';
 export default {
-  name: 'CadastroAluno',
+
   data() {
     return {
       aluno: {
@@ -60,39 +62,41 @@ export default {
         this.error = 'Todos os campos são obrigatórios.';
         return;
       }
+      if (this.aluno.password.length < 6) {
+        this.error = 'A senha deve ter no mínimo 6 caracteres.';
+        return;
+      }
       this.error = null; // Limpa qualquer erro anterior
       axios.post('http://localhost:8000/api/users', this.aluno)
         .then(response => {
-          alert(`Aluno cadastrado com sucesso! ID: ${response.data.id}`);
+          alert(`Aluno cadastrado com sucesso! name: ${response.data.user.name}`);
           this.aluno.name = '';
           this.aluno.email = '';
           this.aluno.password = '';
         })
         .catch(error => {
-          if (error.response && error.response.data && error.response.data.message) {
-            this.error = error.response.data.message;
+          if (error.response && error.response.status === 422) {
+            this.error = 'Email já cadastrado';
           } else {
             this.error = 'Ocorreu um erro ao tentar cadastrar o aluno.';
           }
         });
-    }
-  },
-  methods: {
-  logarAluno() {
-    axios.post('http://localhost:8000/api/login', {
-      email: this.email,
-      password: this.password
-    })
-      .then(response => {
-        // Tratar a resposta da API, por exemplo, armazenar o token de acesso
-        console.log(response.data);
+    },
+    logarAluno() {
+      axios.post('http://localhost:8000/api/login', {
+        email: this.email,
+        password: this.password
       })
-      .catch(error => {
-        // Tratar o erro, por exemplo, exibir uma mensagem de erro
-        console.error(error);
-      });
+        .then(response => {
+          // Tratar a resposta da API, por exemplo, armazenar o token de acesso
+          console.log(response.data);
+        })
+        .catch(error => {
+          // Tratar o erro, por exemplo, exibir uma mensagem de erro
+          console.error(error);
+        });
+    }
   }
-}
 
 }
 
