@@ -5,6 +5,11 @@ import LoginView from '../views/LoginView.vue'
 const routes = [
   {
     path: '/',
+    name: 'login',
+    component: LoginView
+  },
+  {
+    path: '/home',
     name: 'home',
     component: HomeView
   },
@@ -17,11 +22,6 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
 
-  {
-    path: '/login',
-    name: 'login',
-    component: LoginView
-  }
   
 ]
 

@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\Api\CursoAlunoController;
 use App\Http\Controllers\Api\CursoController;
+use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-
+//Login
+Route::post('/', [LoginController::class, 'login']); //POST - http://127.0.0.1:8000/api/
 
 //Listar usuarios
 Route::get('/users', [UserController::class, 'index']); //GET - http://127.0.0.1:8000/api/users?page=1

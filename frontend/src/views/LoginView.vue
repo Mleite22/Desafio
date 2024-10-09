@@ -1,43 +1,49 @@
 <template>
+  <div class="container">
+    <div class="primeira">
+      <form class="form" @submit.prevent="logarAluno">
+        <h1>Logar</h1>
+        <label>
+          <span>Seu e-mail</span>
+          <input class="input" type="email" v-model="email" name="email" placeholder="email@email.com.br">
+        </label>
+        <label>
+          <span>Senha</span>
+          <input class="input" type="password" v-model="password" name="password" placeholder="password">
+        </label>
+        <button type="button">Entrar</button>
+      </form>
+    </div>
 
-  <div class="primeira">
-    <form class="form" @submit.prevent="logarAluno">
-      <h1>Login</h1>
-      <label>
-        <span>Seu e-mail</span>
-        <input class="input" type="email" v-model="email" name="email" placeholder="email@email.com.br">
-      </label>
-      <label>
-        <span>Senha</span>
-        <input class="input" type="password" v-model="password" name="password" placeholder="password">
-      </label>
-      <button type="button">Entrar</button>
-    </form>
-  </div>
+    <div class="segunda">
+      <form class="form" @submit.prevent="cadastrarAluno">
+        <h1>Cadastrar</h1>
+        <label>
+          <span>Seu nome</span>
+          <input class="input" type="text" v-model="aluno.name" name="name" placeholder="Nome">
+        </label>
+        <label>
+          <span>Seu e-mail</span>
+          <input class="input" type="email" v-model="aluno.email" name="email" placeholder="email@email.com.br">
+        </label>
+        <label>
+          <span>Senha</span>
+          <input class="input" type="password" v-model="aluno.password" name="password" placeholder="Minimo 6 digitos">
+        </label>
+        <button type="submit">Cadastrar</button>
 
-  <div class="segunda">
-    <form class="form" @submit.prevent="cadastrarAluno">
-      <h1>Cadastro</h1>
-      <label>
-        <span>Seu nome</span>
-        <input class="input" type="text" v-model="aluno.name" name="name" placeholder="Nome">
-      </label>
-      <label>
-        <span>Seu e-mail</span>
-        <input class="input" type="email" v-model="aluno.email" name="email" placeholder="email@email.com.br">
-      </label>
-      <label>
-        <span>Senha</span>
-        <input class="input" type="password" v-model="aluno.password" name="password" placeholder="Minimo 6 digitos">
-      </label>
-      <button type="submit">Cadastrar</button>
-    </form>
+        <div v-if="error" class="error">
+          <p>{{ error }}</p>
+        </div>
 
-    <div v-if="error" class="error">
-      <p>{{ error }}</p>
+      </form>
+
+
+
     </div>
 
   </div>
+
 
 </template>
 
@@ -52,6 +58,8 @@ export default {
         email: '',
         password: ''
       },
+      email: '',
+      password: '',
       error: null
     };
   },
@@ -104,24 +112,38 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  /* Centraliza horizontalmente */
+  align-items: center;
+  /* Centraliza verticalmente, se necessário */
+  height: 100vh;
+  /* Faz o contêiner ocupar a altura total da tela */
+}
+
 .primeira {
   width: 40%;
-  height: 50%;
+  height: 80%;
   display: inline-block;
   background: #fff;
   box-shadow: 0 19px 38px black, 0 15px 12px rgba(0, 0, 0, 0.22);
   border-radius: 25px;
+  text-align: center;
   vertical-align: top;
 }
 
 .segunda {
   width: 40%;
+  height: 80%;
   display: inline-block;
   background: #fff;
   box-shadow: 0 19px 38px black, 0 15px 12px rgba(0, 0, 0, 0.22);
   border-radius: 25px;
   vertical-align: top;
+  text-align: center;
   margin-left: 30px;
+  align-items: center;
 }
 
 .input,
@@ -176,7 +198,7 @@ button {
   margin: 25px auto;
   height: 36px;
   border-radius: 30px;
-  background-color: blue;
+  background-color: #42b983;
   font-size: 15px;
   font-weight: 600;
   color: white;
@@ -186,4 +208,15 @@ button {
 button:hover {
   background-color: #4CAF50;
 }
+
+.error{
+  color: red;
+  font-size: 20px;
+}
+
+.input::placeholder{
+  font-size: 12px;
+  color: #9eadc4;
+}
+
 </style>
