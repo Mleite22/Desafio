@@ -47,7 +47,7 @@
 
 </template>
 
-<script>
+<script> 
 import axios from 'axios';
 export default {
 
@@ -91,7 +91,7 @@ export default {
         });
     },
     logarAluno() {
-      axios.post('http://localhost:8000/api/login', {
+      axios.post('http://localhost:8000/api/', {
         email: this.email,
         password: this.password
       })
@@ -111,112 +111,6 @@ export default {
 
 </script>
 
-<style scoped>
-.container {
-  display: flex;
-  justify-content: center;
-  /* Centraliza horizontalmente */
-  align-items: center;
-  /* Centraliza verticalmente, se necessário */
-  height: 100vh;
-  /* Faz o contêiner ocupar a altura total da tela */
-}
+<style src="./styleLogin.css" scoped />
 
-.primeira {
-  width: 40%;
-  height: 80%;
-  display: inline-block;
-  background: #fff;
-  box-shadow: 0 19px 38px black, 0 15px 12px rgba(0, 0, 0, 0.22);
-  border-radius: 25px;
-  text-align: center;
-  vertical-align: top;
-}
 
-.segunda {
-  width: 40%;
-  height: 80%;
-  display: inline-block;
-  background: #fff;
-  box-shadow: 0 19px 38px black, 0 15px 12px rgba(0, 0, 0, 0.22);
-  border-radius: 25px;
-  vertical-align: top;
-  text-align: center;
-  margin-left: 30px;
-  align-items: center;
-}
-
-.input,
-button {
-  border: none;
-  outline: none;
-  background: none;
-}
-
-.input {
-  display: block;
-  width: 100%;
-  padding-bottom: 5px;
-  margin-top: 5px;
-  font-size: 16px;
-  border-bottom: 1px solid rgba(109, 93, 93, 0.4);
-  text-align: center;
-  font-family: 'Munito', sans-serif
-}
-
-h1 {
-  color: black;
-  padding-top: 10px;
-  font-size: 30px;
-}
-
-.form {
-  padding: 50px 30px;
-  -webkit-transition: -webkit-transform 1.2s ease-in-out;
-  transition: -webkit-transform 1.2s ease-in-out;
-  transition: transform 1.2s ease-in-out;
-  transition: transform 1.2s ease-in-out, -webkit-transform 1.2 ease-in-out;
-}
-
-label {
-  display: block;
-  width: 260px;
-  margin: 25px auto 0;
-  text-align: center;
-}
-
-label span {
-  font-size: 14px;
-  font-weight: 600;
-  color: #505f75;
-  text-transform: uppercase;
-}
-
-button {
-  display: block;
-  width: 260px;
-  margin: 25px auto;
-  height: 36px;
-  border-radius: 30px;
-  background-color: #42b983;
-  font-size: 15px;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #4CAF50;
-}
-
-.error{
-  color: red;
-  font-size: 20px;
-}
-
-.input::placeholder{
-  font-size: 12px;
-  color: #9eadc4;
-}
-
-</style>
