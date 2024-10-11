@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +36,25 @@ class LoginController extends Controller
                 'message' => 'Login ou senha incorreta'
             ], 404);
         }
+
+    }
+    //Logout
+    public function logout(User $user) : JsonResponse
+    { 
+       try{
+        $user->tokens()->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Deslogado com sucesso!'
+            ], 200);
+
+       }catch(Exception $e){
+        return response()->json([
+            'status' => false,
+            'message' => 'Erro ao sair do login'
+        ], 400);
+       }
 
     }
 }
