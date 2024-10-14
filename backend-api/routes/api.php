@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware([CorsMiddleware::class])->group(function () {
     //Login
-    Route::post('/', [LoginController::class, 'login'])->name('login'); //POST - http://127.0.0.1:8000/api/
+    Route::post('/login', [LoginController::class, 'login'])->name('login'); //POST - http://127.0.0.1:8000/api/
 
     //Rotas restritas
     Route::group(['middleware' => ['auth:sanctum']], function () {

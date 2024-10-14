@@ -36,16 +36,24 @@ export default {
     methods: {
         async logarAluno() {
             // Obtém o cookie CSRF antes de logar
-            await axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie');
+            await axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie', {
+                withCredentials: true
+            });
 
-            axios.post('http://127.0.0.1:8000/api', {
+            const credentials = {
                 email: this.email,
                 password: this.password
+            };
+
+            await axios.post('http://127.0.0.1:8000/api/login', credentials, {
+                withCredentials: true
             })
                 .then(response => {
                     const token = response.data.token;
                     localStorage.setItem('api_token', token);
-                    this.$router.push({ name: '/home' });
+                    this.$router.push({ name: 'home' }).catch(error => {
+  console.error(error)
+});
                 })
                 .catch(error => {
                     if (error.response && error.response.status === 401) {
