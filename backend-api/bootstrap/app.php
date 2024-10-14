@@ -13,14 +13,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // Adiciona o middleware de CORS
+        $middleware->append(\App\Http\Middleware\CorsMiddleware::class);  // Usar append() em vez de global()
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //Lança exceção quando houver erro de autenticação
-        $exceptions->render(function(AuthenticationException $e){
+        $exceptions->render(function (AuthenticationException $e) {
             return response()->json([
                 'status' => false,
                 'message' => 'Autenticação inválida',
             ], 401);
         });
     })->create();
+

@@ -1,6 +1,5 @@
 <template>
     <div class="primeira">
-        
         <form class="form" @submit.prevent="logarAluno">
             <h1>Logar</h1>
             <label>
@@ -16,15 +15,16 @@
             <div v-if="error" class="error">
                 <p>{{ error }}</p>
             </div>
-
         </form>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+axios.defaults.withCredentials = true;
+
 export default {
-    nome: 'LoginUser',
+    name: 'LoginUser',  // Corrigido de 'nome' para 'name'
     data() {
         return {
             email: '',
@@ -32,17 +32,18 @@ export default {
             error: null
         };
     },
+
     methods: {
-        logarAluno() {
-            // var data = {email:this.email, password:this.password}
-            // console.log(data)
-            axios.post('http://127.0.0.1:8000/api/', {
+        async logarAluno() {
+            // Obtém o cookie CSRF antes de logar
+            await axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie');
+
+            axios.post('http://127.0.0.1:8000/api', {
                 email: this.email,
                 password: this.password
             })
-            
                 .then(response => {
-                    const token = response.data.token; 
+                    const token = response.data.token;
                     localStorage.setItem('api_token', token);
                     this.$router.push({ name: '/home' });
                 })
@@ -53,8 +54,10 @@ export default {
                         this.error = 'Ocorreu um erro ao tentar logar o aluno.';
                         console.error(error);
                     }
+                    // Limpar os campos após erro de autenticação
+                    this.email = '';   // Opcional: limpar o e-mail
+                    this.password = '';
                 });
-
         }
     }
 
