@@ -24,7 +24,7 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 export default {
-    name: 'LoginUser',  // Corrigido de 'nome' para 'name'
+    name: 'LoginUser',  
     data() {
         return {
             email: '',
@@ -52,8 +52,8 @@ export default {
                     const token = response.data.token;
                     localStorage.setItem('api_token', token);
                     this.$router.push({ name: 'home' }).catch(error => {
-  console.error(error)
-});
+                        console.error(error)
+                    });
                 })
                 .catch(error => {
                     if (error.response && error.response.status === 401) {

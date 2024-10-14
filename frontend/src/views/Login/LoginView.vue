@@ -1,11 +1,7 @@
 <template>
   <div class="container">
-   
-
     <LoginUser  />
-
     <RegisterUser />
-
   </div>
 
 
