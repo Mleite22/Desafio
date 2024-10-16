@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,100&display=swap');
 
 :root{
-    --button-color: #42b983;
-    --button-color-hover: #4CAF50;
+    --button-color: #330133;
+    --button-color-hover: #7e027e;
     --lable-color: #505f75;
     --error-color: red;
     --purple-color: #330133;
     --purple-color-2: #460346;
+    --link-color-houver: rgba(99, 10, 99, 0.76);
+    --link-houver-2: #33013391;
     --fundo-color: #e0dada;
     --font-color: #f0f0f0;
 }

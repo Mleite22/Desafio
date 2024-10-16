@@ -2,7 +2,7 @@
 
     <div class="navbarIcons">
       <h3 class="logo">Logo</h3>
-      <a href="#" class="sair" @click.prevent="logout">Sair <i class="fa-solid fa-right-to-bracket" style="margin-left: 5px;"></i></a>
+      <a href="#" class="sair" @click.prevent="logout">Sair <i class="fa-solid fa-right-to-bracket" style="margin-left: 2px;"></i></a>
     </div>
 
   </template>
@@ -38,19 +38,5 @@
     }
   }
   </script>
-  
-  <style scoped>
-  .navbarIcons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-  }
-  
-  .sair {
-    margin-right: 5px;
-    padding: 5px;
-    color: var(--font-color);
-  }
-  </style>
-  
+
+<style src="./styleComponets.css" />
