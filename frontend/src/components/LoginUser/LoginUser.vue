@@ -65,7 +65,7 @@ export default {
             if (error.response && error.response.status === 401) {
                 this.error = 'Credenciais inválidas';
             } else {
-                this.error = 'Ocorreu um erro ao tentar logar o aluno.';
+                this.error = 'E-mail ou senha incorreto. Tente novamente';
                 console.error(error);
             }
             // Limpar os campos após erro de autenticação

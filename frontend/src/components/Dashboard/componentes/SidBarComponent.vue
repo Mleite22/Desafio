@@ -2,7 +2,7 @@
     <div class="sidbar">
         <div class="avatar-top">
             <div class="avatar">
-                <span><i class="fa fa-user"></i></span>
+                <span><i class="fa fa-user" style="color: darkgray; font-size: 25px;"></i></span>
             </div>
             <div class="avatar-nome">
                 <h4 class="wellcome">Bem Vindo!</h4>
