@@ -8,14 +8,14 @@
 }
 
 .sidebar {
-  width: 200px;
+  width: 220px;
   height: 100vh;
   color: var(--font-color);
   background: var(--purple-color);
 }
 
 .content-right {
-  width: calc(100% - 200px);
+  width: calc(100% - 220px);
   height: 100vh;
   background: var(--fundo-color);
 
