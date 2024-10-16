@@ -12,15 +12,15 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     //Login
-    public function login(Request $request) : JsonResponse
+    public function login(Request $request): JsonResponse
     {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
             if ($user) {
                 $token = $user->createToken('api_token')->plainTextToken;
                 return response()->json([
                     'status' => true,
-                    'token' =>$token,
+                    'token' => $token,
                     'user' => $user,
                     'message' => 'Logado com sucesso!'
                 ], 201);
@@ -36,25 +36,25 @@ class LoginController extends Controller
                 'message' => 'Login ou senha incorreta'
             ], 404);
         }
-
     }
     //Logout
-    public function logout(User $user) : JsonResponse
-    { 
-       try{
-        $user->tokens()->delete();
+    public function logout(): JsonResponse
+    {
+        try {
+            // Pega o usuário autenticado via Sanctum
+            $user = Auth::user();
+             // Apaga todos os tokens do usuário autenticado
+            $user->tokens()->delete();
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Deslogado com sucesso!'
+            return response()->json([
+                'status' => true,
+                'message' => 'Deslogado com sucesso!'
             ], 200);
-
-       }catch(Exception $e){
-        return response()->json([
-            'status' => false,
-            'message' => 'Erro ao sair do login'
-        ], 400);
-       }
-
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Erro ao sair do login'
+            ], 400);
+        }
     }
 }

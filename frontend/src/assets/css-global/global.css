@@ -5,11 +5,16 @@
     --button-color-hover: #4CAF50;
     --lable-color: #505f75;
     --error-color: red;
+    --purple-color: #330133;
+    --purple-color-2: #460346;
+    --fundo-color: #e0dada;
+    --font-color: #f0f0f0;
 }
 
 *{
     margin: 0;
     padding: 0;
+    text-decoration: none;
 }
 
 html, body {

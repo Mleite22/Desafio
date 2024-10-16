@@ -17,7 +17,8 @@ Route::middleware([CorsMiddleware::class])->group(function () {
     //Rotas restritas
     Route::group(['middleware' => ['auth:sanctum']], function () {
         //logout
-        Route::post('/logout/{user}', [LoginController::class, 'logout']); //POST - http://127.0.0.1:8000/api/logout/1
+        //Route::post('/logout/{user}', [LoginController::class, 'logout']); //POST - http://127.0.0.1:8000/api/logout/1
+        Route::post('/logout', [LoginController::class, 'logout']); //POST - http://127.0.0.1:8000/api/logout/1
 
         //Listar usuarios
         Route::get('/users', [UserController::class, 'index']); //GET - http://127.0.0.1:8000/api/users?page=1
@@ -26,7 +27,7 @@ Route::middleware([CorsMiddleware::class])->group(function () {
         Route::get('/users/{id}', [UserController::class, 'show']); //GET - http://127.0.0.1:8000/api/users/1
 
         //Cadastrar ususario
-        Route::post('/users', [UserController::class, 'store']); //POST - http://127.0.0.1:8000/api/users
+        //Route::post('/users', [UserController::class, 'store']); //POST - http://127.0.0.1:8000/api/users
 
         //Editar usuario
         Route::put('/users/{id}', [UserController::class, 'update']); //PUT - http://127.0.0.1:8000/api/users/1
@@ -54,3 +55,6 @@ Route::middleware([CorsMiddleware::class])->group(function () {
         Route::get('/cursoaluno', [CursoAlunoController::class, 'index']); //GET - http://127.0.0.1:800/api/cursoaluno
     });
 });
+
+//Cadastrar ususario
+Route::post('/users', [UserController::class, 'store']); //POST - http://127.0.0.1:8000/api/users
