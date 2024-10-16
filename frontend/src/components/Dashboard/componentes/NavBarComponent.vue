@@ -24,6 +24,7 @@
           })
           .then(() => {
             localStorage.removeItem('api_token'); // Remove o token do localStorage
+            localStorage.removeItem('user_id'); // Remove o id do localStorage
             this.$router.push({ name: 'login' }); // Redireciona para a página de login
             //alert('Deslogado com sucesso!');
           })

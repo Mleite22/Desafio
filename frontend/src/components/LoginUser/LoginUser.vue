@@ -50,7 +50,7 @@ export default {
         })
         .then(response => {
             const token = response.data.token; // Obtém o token da resposta
-            const userId = response.data.user.id; // Supondo que o ID do usuário esteja na resposta
+            const userId = response.data.user.id; // ID do usuário 
 
             // Salva o token e o ID do usuário no localStorage
             localStorage.setItem('api_token', token);
