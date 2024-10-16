@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Exception;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
@@ -30,9 +31,11 @@ class UserController extends Controller
 
     //Visualizar usuario
     public function show($id) : JsonResponse
+    //public function show() : JsonResponse
     {
         //Recuperando usuario pelo id
         $user = User::find($id);
+        //$user = Auth::user();
         //Verificando se o usuario existe
         if (!$user) {
             return response()->json([

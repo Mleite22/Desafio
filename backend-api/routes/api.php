@@ -25,6 +25,7 @@ Route::middleware([CorsMiddleware::class])->group(function () {
 
         //Visualizar ususario
         Route::get('/users/{id}', [UserController::class, 'show']); //GET - http://127.0.0.1:8000/api/users/1
+        //Route::get('/users/show', [UserController::class, 'show']); //GET - http://127.0.0.1:8000/api/users/1
 
         //Cadastrar ususario
         //Route::post('/users', [UserController::class, 'store']); //POST - http://127.0.0.1:8000/api/users

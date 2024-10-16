@@ -3,22 +3,22 @@ import axios from 'axios';
 
 export default createStore({
   state: {
-    alunos: [],
+    users: [],
     cursos: []
   },
   mutations: {
-    SET_ALUNOS(state, alunos) {
-      state.alunos = alunos;
+    SET_users(state, users) {
+      state.users = users;
     },
     SET_CURSOS(state, cursos) {
       state.cursos = cursos;
     }
   },
   actions: {
-    fetchAlunos({ commit }) {
+    fetchUsers({ commit }) {
       axios.get('http://localhost:8000/api/users')
         .then(response => {
-          commit('SET_ALUNOS', response.data);
+          commit('SET_users', response.data);
         })
         .catch(error => {
           console.error(error);
@@ -36,7 +36,7 @@ export default createStore({
     cadastrarAluno({ dispatch }, aluno) {
       axios.post('http://localhost:8000/api/users', aluno)
         .then(() => {
-          dispatch('fetchAlunos');
+          dispatch('fetchUsers');
         })
         .catch(error => {
           console.error(error);
@@ -53,7 +53,7 @@ export default createStore({
     }
   },
   getters: {
-    alunos: state => state.alunos,
+    users: state => state.users,
     cursos: state => state.cursos
   }
 });

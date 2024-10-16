@@ -34,40 +34,46 @@ export default {
     },
 
     methods: {
-        async logarAluno() {
-            // Obtém o cookie CSRF antes de logar
-            await axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie', {
-                withCredentials: true
+    async logarAluno() {
+        // Obtém o cookie CSRF antes de logar
+        await axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie', {
+            withCredentials: true
+        });
+
+        const credentials = {
+            email: this.email,
+            password: this.password
+        };
+
+        await axios.post('http://127.0.0.1:8000/api/login', credentials, {
+            withCredentials: true
+        })
+        .then(response => {
+            const token = response.data.token; // Obtém o token da resposta
+            const userId = response.data.user.id; // Supondo que o ID do usuário esteja na resposta
+
+            // Salva o token e o ID do usuário no localStorage
+            localStorage.setItem('api_token', token);
+            localStorage.setItem('user_id', userId); // Salva o ID do usuário
+
+            // Redireciona para a página inicial
+            this.$router.push({ name: 'home' }).catch(error => {
+                console.error(error);
             });
-
-            const credentials = {
-                email: this.email,
-                password: this.password
-            };
-
-            await axios.post('http://127.0.0.1:8000/api/login', credentials, {
-                withCredentials: true
-            })
-                .then(response => {
-                    const token = response.data.token;
-                    localStorage.setItem('api_token', token);
-                    this.$router.push({ name: 'home' }).catch(error => {
-                        console.error(error)
-                    });
-                })
-                .catch(error => {
-                    if (error.response && error.response.status === 401) {
-                        this.error = 'Credenciais inválidas';
-                    } else {
-                        this.error = 'Ocorreu um erro ao tentar logar o aluno.';
-                        console.error(error);
-                    }
-                    // Limpar os campos após erro de autenticação
-                    this.email = '';   // Opcional: limpar o e-mail
-                    this.password = '';
-                });
-        }
+        })
+        .catch(error => {
+            if (error.response && error.response.status === 401) {
+                this.error = 'Credenciais inválidas';
+            } else {
+                this.error = 'Ocorreu um erro ao tentar logar o aluno.';
+                console.error(error);
+            }
+            // Limpar os campos após erro de autenticação
+            this.email = '';   // Opcional: limpar o e-mail
+            this.password = '';
+        });
     }
+}
 
 }
 </script>

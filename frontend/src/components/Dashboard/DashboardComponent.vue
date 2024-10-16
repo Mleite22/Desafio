@@ -4,6 +4,7 @@
 
         <div class="sidebar">
 
+            <!-- <SidBarComponent :userId="currentUser_Id"/> -->
             <SidBarComponent />
 
         </div>
@@ -35,7 +36,12 @@ export default {
     components: {
         NavBarComponent,
         SidBarComponent
-    }
+    },
+    // data() {
+    //     return {
+    //         currentUser_Id: 13 // ou outro valor válido
+    //     };
+    // }
 }
 </script>
 
