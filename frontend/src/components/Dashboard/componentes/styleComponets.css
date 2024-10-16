@@ -27,6 +27,10 @@
     .avatar-nome {
       margin-left: 8px;
       font-size: 13px;
+
+      .wellcome {
+        font-size: 10px;
+      }
     }
   }
 

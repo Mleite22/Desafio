@@ -5,6 +5,7 @@
                 <span><i class="fa fa-user"></i></span>
             </div>
             <div class="avatar-nome">
+                <h4 class="wellcome">Bem Vindo!</h4>
                 <p>{{ user?.name }}</p>
             </div>
         </div>
