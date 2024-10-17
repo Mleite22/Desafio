@@ -6,7 +6,7 @@
             </div>
             <div class="avatar-nome">
                 <h4 class="wellcome">Bem Vindo!</h4>
-                <p>{{ user?.name }}</p>
+                <p class="name-user" >{{ user?.name }}</p>
             </div>
         </div>
         <hr>
@@ -16,7 +16,7 @@
                 <li><RouterLink to="/home" class="routers-link"><i class="fa-solid fa-house" style="margin-right: 5px;"></i>Início</RouterLink></li>
                 <li><RouterLink to="/home" class="routers-link"><i class="fa-solid fa-pen" style="margin-right: 5px;"></i>Cursos</RouterLink></li>
                 <li><RouterLink to="/home" class="routers-link"><i class="fa-solid fa-circle-user" style="margin-right: 5px;"></i>Alunos</RouterLink></li>
-                <li><RouterLink to="/home" class="routers-link"><i class="fa-solid fa-list" style="margin-right: 5px;"></i>Lista meus curso</RouterLink></li>            
+                <li><RouterLink to="/home" class="routers-link"><i class="fa-solid fa-list" style="margin-right: 5px;"></i>Listar meus curso</RouterLink></li>            
                 <!-- <li><RouterLink to="/home" class="routers-link">Listar Matriculados</RouterLink></li> -->
                 
             </ul>

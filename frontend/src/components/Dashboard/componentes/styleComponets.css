@@ -28,8 +28,14 @@
       margin-left: 8px;
       font-size: 13px;
 
+      .name-user{
+        font-size: 12px;
+        font-weight: 600;
+      }
+
       .wellcome {
         font-size: 10px;
+        font-weight: 400;
       }
     }
   }
