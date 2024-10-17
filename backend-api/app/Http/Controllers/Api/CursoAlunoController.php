@@ -78,7 +78,7 @@ class CursoAlunoController extends Controller
                     'id' => $cursoAluno->curso_id,
                     'nome' => $curso->nome_curso,
                 ],
-                'usuario' => [
+                'users' => [
                     'id' => $cursoAluno->user_id,
                     'name' => $usuario->name,
                 ],

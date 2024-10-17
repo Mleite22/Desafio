@@ -3,21 +3,20 @@
     <div class="main">
 
         <div class="sidebar">
-
-            <!-- <SidBarComponent :userId="currentUser_Id"/> -->
             <SidBarComponent />
 
         </div>
         <div class="content-right">
 
             <div class="navbar">
-
                 <NavBarComponent />
 
             </div>
             <div class="content">
 
-                <p>Conteúdo</p>
+                <slot name="painel-home">
+                    <p>Painel Home- Criar uma painel para renderizar aqui, que será enviado para o homeView</p>
+                </slot>
 
             </div>
 
@@ -37,11 +36,7 @@ export default {
         NavBarComponent,
         SidBarComponent
     },
-    // data() {
-    //     return {
-    //         currentUser_Id: 13 // ou outro valor válido
-    //     };
-    // }
+    
 }
 </script>
 

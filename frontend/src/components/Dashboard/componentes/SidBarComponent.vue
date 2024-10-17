@@ -13,11 +13,11 @@
         <div class="menu">
             <ul>
                 
-                <li><RouterLink to="/home" class="routers-link">Matricula</RouterLink></li>
-                <li><RouterLink to="/home" class="routers-link">Cursos</RouterLink></li>
-                <li><RouterLink to="/home" class="routers-link">Alunos</RouterLink></li>
-                <li><RouterLink to="/home" class="routers-link">Lista de curso</RouterLink></li>            
-                <li><RouterLink to="/home" class="routers-link">Listar Matriculados</RouterLink></li>            
+                <li><RouterLink to="/home" class="routers-link"><i class="fa-solid fa-house" style="margin-right: 5px;"></i>Início</RouterLink></li>
+                <li><RouterLink to="/home" class="routers-link"><i class="fa-solid fa-pen" style="margin-right: 5px;"></i>Cursos</RouterLink></li>
+                <li><RouterLink to="/home" class="routers-link"><i class="fa-solid fa-circle-user" style="margin-right: 5px;"></i>Alunos</RouterLink></li>
+                <li><RouterLink to="/home" class="routers-link"><i class="fa-solid fa-list" style="margin-right: 5px;"></i>Lista meus curso</RouterLink></li>            
+                <!-- <li><RouterLink to="/home" class="routers-link">Listar Matriculados</RouterLink></li> -->
                 
             </ul>
         </div>

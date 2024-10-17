@@ -1,7 +1,11 @@
 <template>
   <div>
 
-    <DashboardComponent />
+    <DashboardComponent>
+      <template v-slot:painel-home>
+        
+      </template>
+    </DashboardComponent>
     
   </div>
 </template>
