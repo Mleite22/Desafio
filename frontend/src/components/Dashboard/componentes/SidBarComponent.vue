@@ -52,10 +52,10 @@ export default {
                         this.user = response.data.user; // Ajuste conforme a estrutura da resposta da sua API
                     })
                     .catch(error => {
-                        console.error("Error fetching user:", error);
+                        console.error("Erro ao buscar usuário:", error);
                     });
             } else {
-                console.error("User  ID is not defined");
+                console.error("ID não está definido");
             }
         }
     },
