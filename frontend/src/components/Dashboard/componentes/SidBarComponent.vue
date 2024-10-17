@@ -12,18 +12,13 @@
         <hr>
         <div class="menu">
             <ul>
-                <a href="">
-                    <li>Matricula</li>
-                </a>
-                <a href="">
-                    <li>Cursos</li>
-                </a>
-                <a href="">
-                    <li>Lista de curso</li>
-                </a>
-                <a href="">
-                    <li>Alunos Matriculados</li>
-                </a>
+                
+                <li><RouterLink to="/home" class="routers-link">Matricula</RouterLink></li>
+                <li><RouterLink to="/home" class="routers-link">Cursos</RouterLink></li>
+                <li><RouterLink to="/home" class="routers-link">Alunos</RouterLink></li>
+                <li><RouterLink to="/home" class="routers-link">Lista de curso</RouterLink></li>            
+                <li><RouterLink to="/home" class="routers-link">Listar Matriculados</RouterLink></li>            
+                
             </ul>
         </div>
     </div>

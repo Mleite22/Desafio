@@ -54,8 +54,13 @@ Route::middleware([CorsMiddleware::class])->group(function () {
 
         //Rota cursoaluno
         Route::get('/cursoaluno', [CursoAlunoController::class, 'index']); //GET - http://127.0.0.1:800/api/cursoaluno
+
+        //Matricular usuario em um curso
+        Route::post('/cursoaluno', [CursoAlunoController::class, 'store']); // POST - http://127.0.0.1:8000/api/cursoaluno
     });
 });
 
 //Cadastrar ususario
 Route::post('/users', [UserController::class, 'store']); //POST - http://127.0.0.1:8000/api/users
+
+

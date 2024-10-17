@@ -2,8 +2,8 @@
 
 .sidbar {
   margin-top: 10px;
-  
-  
+
+
 
   .avatar-top {
     width: 100%;
@@ -43,21 +43,23 @@
       justify-content: center;
       /* list-style: none; */
 
-      a {
-        li {
+      li {
+        
+        padding: 10px;
+        transition: 0.2s;
+
+        .routers-link {
           font-size: 15px;
           font-weight: 600;
           color: var(--font-color);
-          padding: 10px;
-          transition: 0.2s;
         }
+      }
 
-        li:hover {
-          
-          background-color: var(--link-color-houver);
-          border-radius: 5px;
+      li:hover {
 
-        }
+        background-color: var(--link-color-houver);
+        border-radius: 5px;
+
       }
     }
   }
@@ -69,6 +71,7 @@
     border-color: rgba(211, 214, 214, 0.452);
   }
 }
+
 /* NavBar */
 .navbarIcons {
   display: flex;
@@ -81,12 +84,12 @@
     padding: 10px;
     color: var(--font-color);
     transition: 0.2s;
-    
+
   }
+
   .sair:hover {
     background-color: var(--link-houver-2);
     border-radius: 5px;
   }
 
 }
-
