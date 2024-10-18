@@ -13,10 +13,10 @@
         <div class="menu">
             <ul>
                 
-                <li><RouterLink to="/home" class="routers-link"><i class="fa-solid fa-house" style="margin-right: 5px;"></i>Início</RouterLink></li>
-                <li><RouterLink to="/home" class="routers-link"><i class="fa-solid fa-pen" style="margin-right: 5px;"></i>Cursos</RouterLink></li>
-                <li><RouterLink to="/home" class="routers-link"><i class="fa-solid fa-circle-user" style="margin-right: 5px;"></i>Alunos</RouterLink></li>
-                <li><RouterLink to="/home" class="routers-link"><i class="fa-solid fa-list" style="margin-right: 5px;"></i>Listar meus curso</RouterLink></li>            
+                <li><RouterLink :to="{name: 'home'}" class="routers-link"><i class="fa-solid fa-house" style="margin-right: 5px;"></i>Início</RouterLink></li>
+                <li><RouterLink :to="{name: 'curso'}" class="routers-link"><i class="fa-solid fa-pen" style="margin-right: 5px;"></i>Cursos</RouterLink></li>
+                <li><RouterLink :to="{name: 'alunos'}" class="routers-link"><i class="fa-solid fa-circle-user" style="margin-right: 5px;"></i>Alunos</RouterLink></li>
+                <li><RouterLink :to="{name: 'lista_cursos'}" class="routers-link"><i class="fa-solid fa-list" style="margin-right: 5px;"></i>Listar meus curso</RouterLink></li>            
                 <!-- <li><RouterLink to="/home" class="routers-link">Listar Matriculados</RouterLink></li> -->
                 
             </ul>
@@ -44,13 +44,13 @@ export default {
                     }
                 })
                     .then(response => {
-                        this.user = response.data.user; // Ajuste conforme a estrutura da resposta da sua API
+                        this.user = response.data.user; // resposta da sua API
                     })
                     .catch(error => {
                         console.error("Erro ao buscar usuário:", error);
                     });
             } else {
-                console.error("ID não está definido");
+                console.error("Usuário não está definido");
             }
         }
     },

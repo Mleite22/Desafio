@@ -1,6 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/Home/HomeView.vue'
 import LoginView from '../views/Login/LoginView.vue'
+import CursoView from '@/views/Curso/CursoView.vue'
+import AlunosView from '@/views/Alunos/AlunosView.vue'
+import MeusCursoView from '@/views/Meus Cursos/MeusCursoView.vue'
+
 
 const routes = [
   {
@@ -19,6 +23,24 @@ const routes = [
     name: 'about',
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
     meta: { requiresAuth: true }  // Protegendo a rota About também
+  },
+  {
+    path: '/curso',
+    name: 'curso',
+    component: CursoView,
+    meta: { requiresAuth: true }  // Rota protegida
+  },
+  {
+    path: '/alunos',
+    name: 'alunos',
+    component: AlunosView,
+    meta: { requiresAuth: true }  // Rota protegida
+  },
+  {
+    path: '/lista_cursos',
+    name: 'lista_cursos',
+    component: MeusCursoView,
+    meta: { requiresAuth: true }  // Rota protegida
   },
 ]
 

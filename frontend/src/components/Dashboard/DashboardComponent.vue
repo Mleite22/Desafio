@@ -15,13 +15,17 @@
             <div class="content">
 
                 <slot name="painel-home">
-                    <p>Painel Home- Criar uma painel para renderizar aqui, que será enviado para o homeView</p>
+                </slot>
+                <slot name="painel-curso">
+                </slot>
+                <slot name="painel-alunos">
+                </slot>
+                <slot name="painel-meuscurso">
                 </slot>
 
             </div>
 
         </div>
-        
 
     </div>
 </template>

@@ -2,14 +2,14 @@
   <div>
 
     <DashboardComponent>
-      <template v-slot:painel-home>
+      <template v-slot:painel-meuscurso>
         <div class="contents-pages">
-          <h2>Painé do Início</h2>
+          <h2>Painél Meus Curso</h2>
 
         </div>
       </template>
     </DashboardComponent>
-    
+
   </div>
 </template>
 
@@ -17,7 +17,7 @@
 import DashboardComponent from '@/components/Dashboard/DashboardComponent.vue';
 
 export default {
-  name: 'HomeView',
+  name: 'MeusCursoView',
   components: {
     DashboardComponent,
   }
