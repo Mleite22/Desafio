@@ -1,0 +1,7 @@
+/* @import '@/assets/css-global/global.css'; */
+
+.contents-pages {
+    display: flex;
+    flex-direction: row;
+    
+}
