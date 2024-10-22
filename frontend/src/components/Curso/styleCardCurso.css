@@ -1,4 +1,4 @@
-@import '@/assets/css-global/global.css';
+/* @import '@/assets/css-global/global.css'; */
 
 .card-p {
   flex-wrap: wrap;
@@ -11,12 +11,13 @@
 
 .card {
   /* Permite que os cards cresçam e encolham, com uma largura mínima de 300px */
-  flex: 1 1 300px;
+  flex: 1 1 280px;
   max-width: 300px; /* Define uma largura máxima para os cards */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
   padding: 5px;
+  background-color: #fff;
   transition: transform 0.2s ease;
 
 

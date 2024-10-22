@@ -22,6 +22,8 @@
                 </slot>
                 <slot name="painel-meuscurso">
                 </slot>
+                <slot name="painel-inscrevercurso">
+                </slot>
 
             </div>
 
@@ -40,7 +42,7 @@ export default {
         NavBarComponent,
         SidBarComponent
     },
-    
+
 }
 </script>
 

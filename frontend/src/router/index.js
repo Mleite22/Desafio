@@ -4,6 +4,7 @@ import LoginView from '../views/Login/LoginView.vue'
 import CursoView from '@/views/Curso/CursoView.vue'
 import AlunosView from '@/views/Alunos/AlunosView.vue'
 import MeusCursoView from '@/views/Meus Cursos/MeusCursoView.vue'
+import InscreverCursoView from '@/views/Curso/InscreverCursoView.vue'
 
 
 const routes = [
@@ -18,16 +19,17 @@ const routes = [
     component: HomeView,
     meta: { requiresAuth: true }  // Rota protegida
   },
-  {
-    path: '/about',
-    name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
-    meta: { requiresAuth: true }  // Protegendo a rota About também
-  },
+ 
   {
     path: '/curso',
     name: 'curso',
     component: CursoView,
+    meta: { requiresAuth: true }  // Rota protegida
+  },
+  {
+    path: '/curso/inscrever_curso',
+    name: 'inscrever_curso',
+    component: InscreverCursoView,
     meta: { requiresAuth: true }  // Rota protegida
   },
   {

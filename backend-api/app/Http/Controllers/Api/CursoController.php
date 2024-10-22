@@ -13,23 +13,28 @@ class CursoController extends Controller
 {
     public function index(): JsonResponse
     {
-        //Recuperando curso do banco
-        $curso = Curso::with('modcurso')->orderBy('id', 'Asc')->paginate(2);
-        //Recuperando modalidade do curso do banco
+        // Recuperando curso do banco
+        $curso = Curso::with('modcurso')->orderBy('id', 'Asc')->paginate(3);
+
+        // Formatando os cursos com suas modalidades
         $formattedCursos = $curso->getCollection()->map(function ($curso) {
-            return response()->json([
-                'status' => true,
+            return [
                 'id' => $curso->id,
                 'nome' => $curso->nome_curso,
                 'descricao' => $curso->descricao_curso,
                 'modalidade' => $curso->modcurso->nome,
-            ]);
+            ];
         });
 
-        //Retorna os cursos
+        // Retornando os cursos formatados
         return response()->json([
             'status' => true,
             'curso' => $formattedCursos,
+            'pagination' => [
+                'current_page' => $curso->currentPage(),
+                'last_page' => $curso->lastPage(),
+                'total' => $curso->total(),
+            ],
         ], 200);
     }
 

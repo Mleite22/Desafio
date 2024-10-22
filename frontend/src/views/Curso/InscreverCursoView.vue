@@ -2,12 +2,12 @@
   <div>
 
     <DashboardComponent>
-      <template v-slot:painel-curso>
+      <template v-slot:painel-inscrevercurso>
         <header class="titlle-pages">
-          <p>Cursos Disponíveis</p>
+          <p>Lista de curso para escoher</p>
         </header>
         <div class="contents-pages">
-          <CursoCardsComponent />
+          <InscreveCursoComponent />
         </div>
       </template>
     </DashboardComponent>
@@ -17,13 +17,14 @@
 
 <script>
 import DashboardComponent from '@/components/Dashboard/DashboardComponent.vue';
-import CursoCardsComponent from '../../components/Curso/CursoCardsComponent.vue';
+import InscreveCursoComponent from '../../components/Curso/InscreveCursoComponent.vue';
+
 
 export default {
-  name: 'CursoView',
+  name: 'InscreverCursoView',
   components: {
     DashboardComponent,
-    CursoCardsComponent
+    InscreveCursoComponent
   }
 }
 </script>
