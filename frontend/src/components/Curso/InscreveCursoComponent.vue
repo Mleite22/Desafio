@@ -38,7 +38,9 @@ export default {
     name: 'InscreveCursoComponent',
     data() {
         return {
-            cursos: []
+            cursos: [],
+            currentPage: 1,
+            lastPage: 1,
         };
     },
     mounted() {
@@ -86,6 +88,7 @@ export default {
                     alert('Erro ao verificar inscrição. Tente novamente.'); // Mensagem de erro
                 });
         },
+        //Paginação
         fetchCursos(page = 1) {
             axios.get(`http://127.0.0.1:8000/api/curso?page=${page}`)
                 .then(response => {

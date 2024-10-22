@@ -1,42 +1,66 @@
-@import '@/assets/css-global/global.css';
-
+/* Container principal */
 .main {
-  width: 100%;
-  height: auto;
-  min-height: 545px;
   display: flex;
-  /* background: red; */
+  flex-direction: row;
+  height: 100vh; /* Altura total da viewport */
 }
 
+/* Sidebar */
 .sidebar {
   width: 220px;
-  height: auto;
-  min-height: 545px;
-  color: var(--font-color);
   background: var(--purple-color);
+  color: var(--font-color);
+  min-height: 100%; /* Garante que a sidebar ocupe toda a altura */
 }
 
+/* Container da parte direita */
 .content-right {
-  width: calc(100% - 220px);
-  height: auto;
-  min-height: 545px;
+  flex: 1; /* Faz com que este elemento ocupe o espaço restante */
+  display: flex;
+  flex-direction: column;
   background: var(--fundo-color);
+}
 
-  .navbar{
-    width: 100%;
-    height: 60px;
-    background: var(--purple-color-2);
-    color: var(--font-color);
+/* Navbar */
+
+.content-right .navbar {
+  height: 60px;
+  background: var(--purple-color-2);
+  color: var(--font-color);
+  display: flex;
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: space-between; /* Distribui os itens nas extremidades */
+  padding: 0 20px; /* Espaçamento lateral */
+}
+/* Conteúdo principal */
+.content-right .content {
+  flex: 1; /* Faz com que este elemento ocupe o espaço restante */
+  padding: 20px; /* Espaçamento interno */
+  overflow-y: auto; /* Permite rolagem se o conteúdo exceder a altura */
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%; /* Sidebar ocupa 100% da largura em telas menores */
+    height: auto; /* Ajusta a altura */
   }
 
-  .content{
-    width: 100%;
-    /* height: calc(100vh - 70px); ou deixar em auto */
-    height: auto; /*ou deixar em auto */
-    min-height: 545px;
-    /* flex: content; */
+  .content-right {
+    width: 100%; /* Content-right ocupa 100% da largura em telas menores */
+  }
 
-    /* background-color: brown; */
-    
+  .content-right .navbar {
+    height: 50px; /* Ajusta a altura da navbar em telas menores */
+  }
+
+  .content-right .content {
+    padding: 10px; /* Reduz o padding em telas menores */
+  }
+}
+
+@media (max-height: 607px) {
+  .content-right .content {
+    min-height: auto; /* Remove a altura mínima em telas menores */
   }
 }

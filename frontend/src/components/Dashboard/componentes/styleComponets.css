@@ -79,11 +79,14 @@
 }
 
 /* NavBar */
+
 .navbarIcons {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 15px;
+
 
   .sair {
     width: 60px;

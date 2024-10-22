@@ -4,7 +4,7 @@
     <DashboardComponent>
       <template v-slot:painel-inscrevercurso>
         <header class="titlle-pages">
-          <p>Lista de curso para escoher</p>
+          <p>Escolha seu curso</p>
         </header>
         <div class="contents-pages">
           <InscreveCursoComponent />
