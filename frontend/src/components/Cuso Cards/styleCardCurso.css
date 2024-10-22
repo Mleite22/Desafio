@@ -6,31 +6,19 @@
   gap: 16px;
   display: flex;
   justify-content: left;
-
   /* background-color: aqua; */
 }
 
 .card {
-
+  /* Permite que os cards cresçam e encolham, com uma largura mínima de 300px */
   flex: 1 1 300px;
-  /* Permite que os cards cresçam e encolham, com uma largura mínima de 200px */
-  max-width: 300px;
-  /* Define uma largura máxima para os cards */
+  max-width: 300px; /* Define uma largura máxima para os cards */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Adiciona uma sombra para efeito visual */
   border-radius: 8px;
-  /* Arredonda os cantos do card */
   overflow: hidden;
   padding: 5px;
+  transition: transform 0.2s ease;
 
-  /* width: 200px;
-  height: auto;
-  margin-right: 35px;
-  border: 1px solid rgba(100, 148, 237, 0.685);
-  border-radius: 5px;
-  padding: 5px; */
-
-  /* background: rgb(62, 44, 233); */
 
   .imagens-curso {
 
@@ -40,6 +28,11 @@
     }
 
   }
+}
+
+.card:hover {
+  /* Quando o mouse passa sobre o card, aumenta de tamanho */
+  transform: scale(1.05);
 }
 
 .titulo-card {
