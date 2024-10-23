@@ -12,7 +12,7 @@
 .card {
   /* Permite que os cards cresçam e encolham, com uma largura mínima de 300px */
   flex: 1 1 280px;
-  max-width: 300px; /* Define uma largura máxima para os cards */
+  max-width: 280px; /* Define uma largura máxima para os cards */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;

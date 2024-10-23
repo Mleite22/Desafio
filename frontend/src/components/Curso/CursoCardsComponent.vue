@@ -17,7 +17,7 @@
                 <button class="botao">Inscrever-se</button>
             </div>
         </div>
-        <!-- Card 2 -->
+        
         <div class="card">
             <div class="imagens-curso">
                 <img src="../../assets/images/curso-2.jpg" alt="">
@@ -35,7 +35,6 @@
             </div>
         </div>
 
-        <!-- Card 3 -->
         <div class="card">
             <div class="imagens-curso">
                 <img src="../../assets/images/curso-3.jpg" alt="">
@@ -63,12 +62,13 @@
             </div>
             <div class="descricao">
                 <!-- <h2>{{ descricao_curso }}</h2> -->
-                <p>Curso de linguagem JavaScript, voltado para iniciantes e para quem quiser aprender mais sobre ECMAScript</p>
+                <p>Voltado para iniciantes e para quem quiser aprender mais sobre ECMAScript</p>
             </div>
             <div class="inscricao">
                 <button class="botao">Inscrever-se</button>
             </div>
         </div>
+
         <div class="card">
             <div class="imagens-curso">
                 <img src="../../assets/images/curso-4.jpg" alt="">
@@ -85,6 +85,7 @@
                 <button class="botao">Inscrever-se</button>
             </div>
         </div>
+
         <div class="card">
             <div class="imagens-curso">
                 <img src="../../assets/images/curso-5.jpg" alt="">
@@ -101,22 +102,7 @@
                 <button class="botao">Inscrever-se</button>
             </div>
         </div>
-        <div class="card">
-            <div class="imagens-curso">
-                <img src="../../assets/images/curso-5.jpg" alt="">
-            </div>
-            <div class="titulo-card">
-                <!-- <h1>{{ nome_curso }}</h1> -->
-                <h2>Python Machine Learning</h2>
-            </div>
-            <div class="descricao">
-                <!-- <h2>{{ descricao_curso }}</h2> -->
-                <p>Explorando os fundamentos e técnicas essenciais</p>
-            </div>
-            <div class="inscricao">
-                <button class="botao">Inscrever-se</button>
-            </div>
-        </div>
+        
     </di>
 
 </template>

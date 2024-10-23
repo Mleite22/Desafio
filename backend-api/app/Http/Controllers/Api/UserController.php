@@ -31,7 +31,6 @@ class UserController extends Controller
 
     //Visualizar usuario
     public function show($id) : JsonResponse
-    //public function show() : JsonResponse
     {
         //Recuperando usuario pelo id
         $user = User::find($id);
