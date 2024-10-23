@@ -67,5 +67,3 @@ Route::post('/users', [UserController::class, 'store']); //POST - http://127.0.0
 //Rotas cursos
 Route::get('/curso', [CursoController::class, 'index']); //GET - http://127.0.0.1:8000/api/curso?page=1
 
-//Matricular usuario em um curso
-//Route::middleware('auth:sanctum')->post('/cursoaluno', [CursoAlunoController::class, 'store']);

@@ -12,10 +12,22 @@ use Illuminate\Http\Request;
 
 class CursoAlunoController extends Controller
 {
+
     public function index(): JsonResponse
     {
-        //Recupera Usuario que estão matriculados em algum curso
-        $cursoAlunos = CursoAluno::with('curso', 'users')->orderBy('id', 'DESC')->paginate(2);
+        // Obtém o usuário autenticado
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Usuário não autenticado.',
+            ], 401); // Não autorizado
+        }
+
+        // Recupera os cursos em que o usuário está matriculado
+        $cursoAlunos = CursoAluno::where('user_id', $user->id)
+            ->with('curso') 
+            ->get(); 
 
         return response()->json([
             'status' => true,
@@ -25,16 +37,16 @@ class CursoAlunoController extends Controller
                     'curso' => [
                         'id' => $cursoAluno->curso_id,
                         'nome' => Curso::find($cursoAluno->curso_id)->nome_curso,
-                    ],
-                    'users' => [
-                        'id' => $cursoAluno->user_id,
-                        'name' => User::find($cursoAluno->user_id)->name,
+                        'nome_user' => User::find($cursoAluno->user_id)->name,
+                        'descricao' => Curso::find($cursoAluno->curso_id)->descricao_curso
                     ],
                 ];
             }),
         ], 200);
     }
 
+
+    //Matricular aluno
     public function store(Request $request): JsonResponse
     {
         // Validar a requisição
@@ -43,6 +55,7 @@ class CursoAlunoController extends Controller
         ]);
 
         // Obter o usuário autenticado
+
         $user = Auth::user();
 
         // Verificar se o usuário já está inscrito no curso
@@ -89,4 +102,27 @@ class CursoAlunoController extends Controller
             'inscrito' => $inscrito,
         ], 200);
     }
+
+    // public function show(): JsonResponse
+    // {
+    //     //Recupera Usuario que estão matriculados em algum curso
+    //     $cursoAlunos = CursoAluno::with('curso', 'users')->orderBy('id', 'DESC')->paginate(4);
+
+    //     return response()->json([
+    //         'status' => true,
+    //         'cursoAlunos' => $cursoAlunos->map(function ($cursoAluno) {
+    //             return [
+    //                 'id' => $cursoAluno->id,
+    //                 'curso' => [
+    //                     'id' => $cursoAluno->curso_id,
+    //                     'nome' => Curso::find($cursoAluno->curso_id)->nome_curso,
+    //                 ],
+    //                 'users' => [
+    //                     'id' => $cursoAluno->user_id,
+    //                     'name' => User::find($cursoAluno->user_id)->name,
+    //                 ],
+    //             ];
+    //         }),
+    //     ], 200);
+    // }    
 }

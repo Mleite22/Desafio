@@ -14,7 +14,7 @@
                 <p>Desenvolvimento de sistemas web utilizando HTML, CSS e JavaScript</p>
             </div>
             <div class="inscricao">
-                <button class="botao">Inscrever-se</button>
+                <button class="botao"><RouterLink :to="{name: 'inscrever_curso'}" class="routers-link">Inscreva-se</RouterLink></button>
             </div>
         </div>
         
@@ -31,7 +31,7 @@
                 <p>Desenvolvimento de aplicativos móveis utilizando Java e Kotlin</p>
             </div>
             <div class="inscricao">
-                <button class="botao">Inscrever-se</button>
+                <button class="botao"><RouterLink :to="{name: 'inscrever_curso'}" class="routers-link">Inscreva-se</RouterLink></button>
             </div>
         </div>
 
@@ -48,7 +48,7 @@
                 <p>Desenvolvimento de jogos utilizando Unity e C#</p>
             </div>
             <div class="inscricao">
-                <button class="botao">Inscrever-se</button>
+                <button class="botao"><RouterLink :to="{name: 'inscrever_curso'}" class="routers-link">Inscreva-se</RouterLink></button>
             </div>
         </div>
 
@@ -65,7 +65,7 @@
                 <p>Voltado para iniciantes e para quem quiser aprender mais sobre ECMAScript</p>
             </div>
             <div class="inscricao">
-                <button class="botao">Inscrever-se</button>
+                <button class="botao"><RouterLink :to="{name: 'inscrever_curso'}" class="routers-link">Inscreva-se</RouterLink></button>
             </div>
         </div>
 
@@ -82,7 +82,7 @@
                 <p>É um poderoso framework PHP livre e open-source.</p>
             </div>
             <div class="inscricao">
-                <button class="botao">Inscrever-se</button>
+                <button class="botao"><RouterLink :to="{name: 'inscrever_curso'}" class="routers-link">Inscreva-se</RouterLink></button>
             </div>
         </div>
 
@@ -99,7 +99,7 @@
                 <p>Automações, Desenvolvimento e Ciência de Dados.</p>
             </div>
             <div class="inscricao">
-                <button class="botao">Inscrever-se</button>
+                <button class="botao"><RouterLink :to="{name: 'inscrever_curso'}" class="routers-link">Inscreva-se</RouterLink></button>
             </div>
         </div>
         
