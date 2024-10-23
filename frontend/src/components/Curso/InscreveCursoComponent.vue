@@ -47,7 +47,7 @@ export default {
         this.fetchCursos(1);
         axios.get('http://127.0.0.1:8000/api/curso')
             .then(response => {
-                this.cursos = response.data.curso;  // Certifique-se de que o caminho correto está aqui
+                this.cursos = response.data.curso;  
             })
             .catch(error => {
                 console.error('Erro ao buscar os cursos', error);
@@ -55,7 +55,7 @@ export default {
     },
     methods: {
         inscreverCurso(cursoId) {
-            const token = localStorage.getItem('api_token'); // Ajuste se necessário
+            const token = localStorage.getItem('api_token');
 
             const config = {
                 headers: {
