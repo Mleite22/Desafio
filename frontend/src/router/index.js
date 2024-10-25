@@ -5,6 +5,7 @@ import CursoView from '@/views/Curso/CursoView.vue'
 import AlunosView from '@/views/Alunos/AlunosView.vue'
 import MeusCursoView from '@/views/Meus Cursos/MeusCursoView.vue'
 import InscreverCursoView from '@/views/Curso/InscreverCursoView.vue'
+import EditProfileView from '@/views/Alunos/EditProfileView.vue'
 
 
 const routes = [
@@ -19,7 +20,7 @@ const routes = [
     component: HomeView,
     meta: { requiresAuth: true }  // Rota protegida
   },
- 
+
   {
     path: '/curso',
     name: 'curso',
@@ -36,6 +37,13 @@ const routes = [
     path: '/alunos',
     name: 'alunos',
     component: AlunosView,
+    meta: { requiresAuth: true }  // Rota protegida
+  },
+  {
+    path: '/edit-profile',
+    name: 'EditProfileView',
+    component: EditProfileView, 
+    //props: true,
     meta: { requiresAuth: true }  // Rota protegida
   },
   {

@@ -24,14 +24,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [LoginController::class, 'logout']); //POST - http://127.0.0.1:8000/api/logout/1
 
     //Listar usuarios
-    Route::get('/users', [UserController::class, 'index']); //GET - http://127.0.0.1:8000/api/users?page=1
+    Route::get('/users', [UserController::class, 'index']); //GET - http://127.0.0.1:8000/api/users?page=1 
 
     //Visualizar ususario
     Route::get('/users/{id}', [UserController::class, 'show']); //GET - http://127.0.0.1:8000/api/users/1
     //Route::get('/users/show', [UserController::class, 'show']); //GET - http://127.0.0.1:8000/api/users/1
 
     //Editar usuario
-    Route::put('/users/{id}', [UserController::class, 'update']); //PUT - http://127.0.0.1:8000/api/users/1
+    Route::patch('/users/profile', [UserController::class, 'update']); //PATCH - http://127.0.0.1:8000/api/users/1
 
     //Deletar usuario
     Route::delete('/users/{id}', [UserController::class, 'destroy']); //DELETE - http://127.0.0.1:8000/api/users/9

@@ -18,7 +18,7 @@
                 </slot>
                 <slot name="painel-curso">
                 </slot>
-                <slot name="painel-alunos">
+                <slot name="painel-perfil-alunos">
                 </slot>
                 <slot name="painel-meuscurso">
                 </slot>

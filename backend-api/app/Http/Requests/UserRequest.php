@@ -41,9 +41,9 @@ class UserRequest extends FormRequest
         //Recupera o id do usuario na edição
         $userId = $this->route('user');
         return [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email'. ($userId ? $userId->id : null),
-            'password' => 'required|min:6',
+            'name' => 'sometimes|required|string|max:255',
+            'email' => 'sometimes|required|email|unique:users,email'. ($userId ? $userId->id : null),
+            'password' => 'sometimes|required|min:6',
         ];
     }
 

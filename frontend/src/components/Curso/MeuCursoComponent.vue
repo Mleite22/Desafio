@@ -2,7 +2,17 @@
     <div class="card-p">
         <div v-if="loading">Carregando cursos...</div>
         <div v-if="error">{{ error }}</div>
+        
+        <div v-if="!loading && !error && cursos.length === 0">
+            <h3 class="mensagem">Você ainda não se matriculou em curso</h3>
+        </div>
+    
         <div class="card" v-for="curso in cursos" :key="curso.id">
+            <!-- Foto generica -->
+            <div class="imagens-curso">
+                <img src="../../assets/images/curso-1.jpg" alt="" srcset="">
+            </div>
+
             <div class="titulo-card">
                 <h2>{{ curso.curso.nome }}</h2>
             </div>
@@ -32,7 +42,7 @@ export default {
     },
 
     methods: {
-        fetchCursos() {
+        async fetchCursos() {
             const token = localStorage.getItem('api_token');
             if (!token) {
                 this.error = "Token de autenticação não encontrado.";
@@ -43,7 +53,7 @@ export default {
             this.loading = true; // Inicia o carregamento
             this.error = null; // Limpa erros anteriores
 
-            axios.get('http://127.0.0.1:8000/api/cursoaluno', {
+            await axios.get('http://127.0.0.1:8000/api/cursoaluno', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

@@ -3,8 +3,11 @@
 
     <DashboardComponent>
       <template v-slot:painel-alunos>
+        <header class="titlle-pages">
+          <p>Alunos</p>
+        </header>
         <div class="contents-pages">
-          <h2>Painél do Aluno</h2>
+          
 
         </div>
       </template>
@@ -15,6 +18,7 @@
 
 <script>
 import DashboardComponent from '@/components/Dashboard/DashboardComponent.vue';
+
 
 export default {
   name: 'AlunosView',

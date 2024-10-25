@@ -1,5 +1,8 @@
 <template>
+
     <div class="list-curso">
+        
+        <div v-if="error">{{ error }}</div>
         <table>
             <thead>
                 <tr>
@@ -39,6 +42,8 @@ export default {
     data() {
         return {
             cursos: [],
+            loading: false,
+            error: null,
             currentPage: 1,
             lastPage: 1,
         };
@@ -47,7 +52,7 @@ export default {
         this.fetchCursos(1);
         axios.get('http://127.0.0.1:8000/api/curso')
             .then(response => {
-                this.cursos = response.data.curso;  
+                this.cursos = response.data.curso;
             })
             .catch(error => {
                 console.error('Erro ao buscar os cursos', error);
@@ -62,6 +67,8 @@ export default {
                     Authorization: `Bearer ${token}`
                 }
             };
+            
+            this.error = null; // Limpa erros anteriores
 
             // Verificar se o usuário já está inscrito no curso
             axios.get(`http://127.0.0.1:8000/api/cursoaluno/${cursoId}`, config)
@@ -87,6 +94,9 @@ export default {
                     console.error('Erro ao verificar inscrição', error);
                     alert('Erro ao verificar inscrição. Tente novamente.'); // Mensagem de erro
                 });
+                
+
+
         },
         //Paginação
         fetchCursos(page = 1) {
@@ -105,6 +115,7 @@ export default {
                 this.fetchCursos(page); // Chama a função de busca para a nova página
             }
         }
+
 
     }
 

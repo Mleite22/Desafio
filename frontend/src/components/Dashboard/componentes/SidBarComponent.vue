@@ -17,7 +17,7 @@
                 <li><RouterLink :to="{name: 'curso'}" class="routers-link"><i class="fa-solid fa-code" style="margin-right: 5px;"></i>Cursos</RouterLink></li>
                 <li><RouterLink :to="{name: 'inscrever_curso'}" class="routers-link"><i class="fa-solid fa-pen" style="margin-right: 5px;"></i>Inscreva-se</RouterLink></li>
                 <li><RouterLink :to="{name: 'lista_cursos'}" class="routers-link"><i class="fa-solid fa-list" style="margin-right: 5px;"></i>Listar meus curso</RouterLink></li>
-                <li><RouterLink :to="{name: 'alunos'}" class="routers-link"><i class="fa-solid fa-circle-user" style="margin-right: 5px;"></i>Alunos</RouterLink></li>
+                <li><RouterLink :to="{ name: 'EditProfileView'}" class="routers-link"><i class="fa-solid fa-circle-user" style="margin-right: 5px;"></i>Editar Perfil</RouterLink></li>
                 
             </ul>
         </div>
@@ -36,6 +36,7 @@ export default {
     },
     methods: {
         getUser() {
+            //função de Recuperar dados
             const userId = localStorage.getItem('user_id'); // Obtém o ID do usuário do localStorage
             if (userId) {
                 axios.get(`http://127.0.0.1:8000/api/users/${userId}`, {

@@ -20,15 +20,14 @@
   background-color: #fff;
   transition: transform 0.2s ease;
 
-
-  /* .imagens-curso {
-
-    img {
-      width: 100%;
-      height: auto;
-    }
-
-  } */
+}
+.mensagem {
+  width: 100%;
+  border-radius: 10px;
+  padding: 30px;
+  font-size: 25px;
+  text-align: center;
+  background: rgba(218, 175, 66, 0.664);
 }
 
 .card:hover {
