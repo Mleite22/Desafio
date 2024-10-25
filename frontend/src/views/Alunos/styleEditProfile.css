@@ -1,0 +1,77 @@
+@import '@/assets/css-global/global.css';
+
+.contents-pages {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.form-page {
+  width: 100%;
+  height: auto;
+  border-collapse: collapse;
+  border-bottom: 1px solid #b8b3b3;
+}
+
+.user-field {
+  padding: 12px;
+  text-align: left;
+  
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  color: var(--font-color-2);
+}
+
+input {
+  width: 97%;
+  padding: 15px 20px;
+  /* margin-bottom: 5px; */
+  margin-right: 15px;
+  border-radius: 10px;
+  color: var(--font-color-2);
+  font-weight: 600;
+}
+
+.title-form {
+  padding: 15px;
+  text-align: center;
+  background-color: var(--purple-color-2);
+  color: var(--font-color);
+  border-radius: 10px;
+}
+
+input:hover {
+  background-color: #f1f1f1;
+}
+
+.botao {
+  width: 100%;
+  background-color: #4CAF50;
+  color: var(--font-color);
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.botao:hover {
+  background-color: #3b8a3f;
+  /* Verde mais escuro */
+}
+
+.message {
+  margin-left: 15px;
+  width: 94%;
+  padding: 15px;
+  text-align: center;
+  background-color: var(--advice-color);
+}
+

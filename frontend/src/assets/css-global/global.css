@@ -13,6 +13,7 @@
     --font-color: #f0f0f0;
     --font-color-titlle: #19191a;
     --font-color-2: #414e61;
+    --advice-color: rgb(241, 241, 174);
 }
 
 *{
@@ -20,6 +21,7 @@
     padding: 0;
     text-decoration: none;
     list-style: none;
+    border: none;
     
 }
 

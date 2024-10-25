@@ -5,26 +5,30 @@
                 <header class="titlle-pages">
                     <p>Perfil do Alunos</p>
                 </header>
+                <div class="message" v-if="message" :class="{ 'success': success, 'error': !success }">{{ message }}</div>
                 <div class="contents-pages">
-                    <div>
-                        <h2>Editar Perfil</h2>
+                    <div class="form-page">
+
+                        <div class="title-form">
+                            <h2>Editar Perfil</h2>
+                        </div>
                         <form @submit.prevent="updateUser">
-                            <div>
+                            <div class="user-field">
                                 <label for="name">Nome:</label>
                                 <input type="text" id="name" v-model="user.name" required />
                             </div>
-                            <div>
+                            <div class="user-field">
                                 <label for="email">E-mail:</label>
                                 <input type="email" id="email" v-model="user.email" required />
                             </div>
-                            <div>
+                            <div class="user-field">
                                 <label for="password">Senha:</label>
                                 <input type="password" id="password" v-model="user.password" />
-                                <small>(Deixe em branco para não alterar)</small>
                             </div>
-                            <button type="submit">Salvar</button>
+                            <small>(Deixe a senha em branco caso não queira alterar)</small>
+                            <button class="botao" type="submit">Salvar</button>
                         </form>
-                        <div v-if="message" :class="{ 'success': success, 'error': !success }">{{ message }}</div>
+                        
                     </div>
                 </div>
             </template>
@@ -104,10 +108,21 @@ export default {
                 });
                 this.message = response.data.message;
                 this.success = true;
+                //temporizador para limpar as mensagens
+                setTimeout(() => {
+                    this.success = false;
+                    this.message = '';
+                }, 4000);
             } catch (error) {
                 console.error('Erro ao atualizar usuário: ', error);
                 this.message = 'Erro ao atualizar usuário.';
                 this.success = false;
+                
+                //temporizador para limpar as mensagens
+                setTimeout(() => {
+                    this.success = false;
+                    this.message = '';
+                }, 4000);
             }
         }
 
@@ -115,3 +130,5 @@ export default {
     },
 }
 </script>
+
+<style src="./styleEditProfile.css" scoped/>
