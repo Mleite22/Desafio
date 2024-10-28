@@ -35,7 +35,7 @@ export default {
             loading: false,
             error: null
         };
-    },
+    }, 
 
     mounted() {
         this.fetchCursos();
