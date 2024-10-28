@@ -13,6 +13,7 @@ class Curso extends Model
         'nome_curso',
         'descricao_curso',
         'modcurso_id',
+        'imagem',
 
     ];
 

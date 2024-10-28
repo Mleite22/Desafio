@@ -23,6 +23,7 @@ class CursoController extends Controller
                 'nome' => $curso->nome_curso,
                 'descricao' => $curso->descricao_curso,
                 'modalidade' => $curso->modcurso->nome,
+                'imagem' => $curso->imagem
             ];
         });
 
@@ -58,6 +59,7 @@ class CursoController extends Controller
                 'nome' => $curso->nome_curso,
                 'descricao' => $curso->descricao_curso,
                 'modalidade' => $curso->modcurso->nome,
+                'imagem' => $curso->imagem,
             ]
 
         ], 200);
@@ -66,21 +68,26 @@ class CursoController extends Controller
     //Cadatrar curso
     public function store(CursoRequest $request): JsonResponse
     {
-
-        //Iniciar a transação
+        // Iniciar a transação
         DB::beginTransaction();
 
         try {
-
-            //Criando curso
-            $curso = Curso::create([
+            $cursoData = [
                 'nome_curso' => $request->nome_curso,
                 'descricao_curso' => $request->descricao_curso,
-                'modcurso_id' => $request->modcurso_id
-            ]);
-            //Comitando atransação
+                'modcurso_id' => $request->modcurso_id,
+            ];
+
+            // Verifica se uma imagem foi enviada
+            if ($request->hasFile('imagem')) {
+                $cursoData['imagem'] = $request->file('imagem')->store('imagens', 'public'); // Armazena a imagem se fornecida
+            }
+
+            // Criando curso
+            $curso = Curso::create($cursoData);
+            // Comitando a transação
             DB::commit();
-            //Retornando curso
+            // Retornando curso
             return response()->json([
                 'status' => true,
                 'message' => 'Curso Cadastrado com sucesso!',
@@ -88,10 +95,11 @@ class CursoController extends Controller
                     'nome_curso' => $curso->nome_curso,
                     'descricao_curso' => $curso->descricao_curso,
                     'modcurso_id' => $curso->modcurso->nome,
+                    'imagem' => $curso->imagem, // Incluindo o campo imagem na resposta
                 ]
             ], 201);
         } catch (Exception $e) {
-            //Desfazendo a transação
+            // Desfazendo a transação
             DB::rollBack();
             return response()->json([
                 'status' => false,
@@ -100,55 +108,54 @@ class CursoController extends Controller
         }
     }
 
-    //Editar cusro
+    // Editar curso
     public function update(CursoRequest $request, $id): JsonResponse
     {
-        //Iniciar a transação
+        // Iniciar a transação
         DB::beginTransaction();
         try {
-            //Atualizando curso
+            // Encontrar o curso
             $curso = Curso::find($id);
-            $curso->update([
+            if (!$curso) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Curso não encontrado',
+                ], 404);
+            }
+
+            $cursoData = [
                 'nome_curso' => $request->nome_curso,
                 'descricao_curso' => $request->descricao_curso,
-                'modcurso_id' => $request->modcurso_id
-            ]);
-            //Comitando a transação
+                'modcurso_id' => $request->modcurso_id,
+            ];
+
+            // Verifica se uma nova imagem foi enviada
+            if ($request->hasFile('imagem')) {
+                $cursoData['imagem'] = $request->file('imagem')->store('imagens', 'public'); // Atualiza a imagem se fornecida
+            }
+
+            // Atualiza o curso com os dados
+            $curso->update($cursoData);
+            // Comitando a transação
             DB::commit();
-            //Retornando curso
+            // Retornando curso
             return response()->json([
-                'status'  => true,
+                'status' => true,
                 'message' => 'Curso Atualizado com sucesso!',
                 'curso' => [
-                    'nome_curso'  => $curso->nome_curso,
+                    'id' => $curso->id,
+                    'nome_curso' => $curso->nome_curso,
                     'descricao_curso' => $curso->descricao_curso,
                     'modcurso_id' => $curso->modcurso->nome,
+                    'imagem' => $curso->imagem, // Incluindo o campo imagem na resposta
                 ]
             ], 200);
         } catch (Exception $e) {
-            //Desfazendo a transação
+            // Desfazendo a transação
             DB::rollBack();
             return response()->json([
-                'status'  => false,
+                'status' => false,
                 'message' => 'Erro ao atualizar Curso',
-            ], 400);
-        }
-    }
-
-    //Deletar curso
-    public function destroy($id): JsonResponse
-    {
-        try {
-            //Deletando curso
-            Curso::destroy($id);
-            return response()->json([
-                'status'  => true,
-                'message' => 'Curso deletado com sucesso!',
-            ], 200);
-        } catch (Exception $e) {
-            return response()->json([
-                'status'  => false,
-                'message' => 'Erro ao deletar curso',
             ], 400);
         }
     }

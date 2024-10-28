@@ -21,6 +21,7 @@ class CursoRequest extends FormRequest
             'nome_curso' => 'required',
             'descricao_curso' => 'required',
             'modcurso_id' => 'required',
+            'imagem' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Imagem é opcional
         ];
     }
 
