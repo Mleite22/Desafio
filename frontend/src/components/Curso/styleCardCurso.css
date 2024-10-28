@@ -10,6 +10,10 @@
   /* background-color: aqua; */
 }
 
+.loading, .error{
+  width: 100%;
+}
+
 .card {
   /* Permite que os cards cresçam e encolham, com uma largura mínima de 300px */
   flex: 1 1 280px;

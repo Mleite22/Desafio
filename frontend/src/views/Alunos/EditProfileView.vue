@@ -97,13 +97,12 @@ export default {
 
                 const userData = {
                     name: this.user.name,
-                    email: this.user.email,
-                    //password: this.user.password, // Só envia a senha se preenchida
+                    email: this.user.email,                   
                     password: this.user.password ? this.user.password : undefined, // Só envia a senha se preenchida
                     
                 };
+                
                 console.log(userData);
-
                 const response = await axios.patch('http://127.0.0.1:8000/api/users/profile', userData, {
                     headers: {
                         Authorization: `Bearer ${token}`

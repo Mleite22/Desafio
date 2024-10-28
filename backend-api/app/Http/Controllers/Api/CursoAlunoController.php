@@ -55,7 +55,6 @@ class CursoAlunoController extends Controller
         ]);
 
         // Obter o usuário autenticado
-
         $user = Auth::user();
 
         // Verificar se o usuário já está inscrito no curso
@@ -103,26 +102,4 @@ class CursoAlunoController extends Controller
         ], 200);
     }
 
-    // public function show(): JsonResponse
-    // {
-    //     //Recupera Usuario que estão matriculados em algum curso
-    //     $cursoAlunos = CursoAluno::with('curso', 'users')->orderBy('id', 'DESC')->paginate(4);
-
-    //     return response()->json([
-    //         'status' => true,
-    //         'cursoAlunos' => $cursoAlunos->map(function ($cursoAluno) {
-    //             return [
-    //                 'id' => $cursoAluno->id,
-    //                 'curso' => [
-    //                     'id' => $cursoAluno->curso_id,
-    //                     'nome' => Curso::find($cursoAluno->curso_id)->nome_curso,
-    //                 ],
-    //                 'users' => [
-    //                     'id' => $cursoAluno->user_id,
-    //                     'name' => User::find($cursoAluno->user_id)->name,
-    //                 ],
-    //             ];
-    //         }),
-    //     ], 200);
-    // }    
 }

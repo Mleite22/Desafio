@@ -1,7 +1,7 @@
 <template>
     <di class="card-p">
-        <div v-if="loading">Carregando cursos...</div>
-        <div v-if="error">{{ error }}</div>
+        <div class="loading" v-if="loading">Carregando cursos...</div>
+        <div class="error" v-if="error">{{ error }}</div>
         
         <!-- Card 1 -->
         <div class="card" v-for="curso in cursos" :key="curso.id">
@@ -43,7 +43,6 @@ export default {
         };
     },
     mounted() {
-        
         this.fetchCursos();
        
         axios.get('http://127.0.0.1:8000/api/curso')
@@ -53,7 +52,7 @@ export default {
             .catch(error => {
                 console.error('Erro ao buscar os cursos', error);
             });
-    },
+    }, 
     methods: {
     fetchCursos(page = 1) {
         this.loading = true; // Inicia o carregamento
