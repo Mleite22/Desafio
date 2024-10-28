@@ -4,7 +4,7 @@
         <div v-if="error">{{ error }}</div>
         
         <div v-if="!loading && !error && cursos.length === 0">
-            <h3 class="mensagem">Você ainda não se matriculou em curso</h3>
+            <h3 class="mensagem">Você ainda não se matriculou em um curso</h3>
         </div>
     
         <div class="card" v-for="curso in cursos" :key="curso.id">

@@ -23,7 +23,7 @@
                             </div>
                             <div class="user-field">
                                 <label for="password">Senha:</label>
-                                <input type="password" id="password" v-model="user.password" />
+                                <input type="password" id="password" v-model="user.password"/>
                             </div>
                             <small>(Deixe a senha em branco caso não queira alterar)</small>
                             <button class="botao" type="submit">Salvar</button>
@@ -98,8 +98,11 @@ export default {
                 const userData = {
                     name: this.user.name,
                     email: this.user.email,
+                    //password: this.user.password, // Só envia a senha se preenchida
                     password: this.user.password ? this.user.password : undefined, // Só envia a senha se preenchida
+                    
                 };
+                console.log(userData);
 
                 const response = await axios.patch('http://127.0.0.1:8000/api/users/profile', userData, {
                     headers: {

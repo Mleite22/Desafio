@@ -82,30 +82,37 @@ class UserController extends Controller
     //Editar usuario
     public function update(UserRequest $request): JsonResponse
     {
-        $user = Auth::user(); // Obtém o usuário autenticado
+        try {
+            $user = Auth::user(); // Obtém o usuário autenticado
 
-        if (!$user) {
+            if (!$user) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Usuário não encontrado'
+                ], 404);
+            }
+
+            // Validação dos dados antes de atualizar
+            $data = $request->only(['name', 'email', 'password']);
+            if (empty($data['password'])) {
+                unset($data['password']); // Remove o campo 'password' se estiver vazio
+            } else {
+                $data['password'] = bcrypt($data['password']); // Criptografa a senha
+            }
+
+            $user->update($data); // Atualiza o usuário autenticado
+
+            return response()->json([
+                'status' => true,
+                'user' => $user,
+                'message' => 'Perfil atualizado com sucesso!'
+            ], 200);
+        } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'message' => 'Usuário não encontrado'
-            ], 404);
+                'message' => 'Erro ao atualizar usuário: ' . $e->getMessage()
+            ], 500);
         }
-
-        // Validação dos dados antes de atualizar
-        $data = $request->only(['name', 'email', 'password']);
-        if (empty($data['password'])) {
-            unset($data['password']); // Remove o campo 'password' se estiver vazio
-        } else {
-            $data['password'] = bcrypt($data['password']); // Criptografa a senha
-        }
-
-        $user->update($data); // Atualiza o usuário autenticado
-
-        return response()->json([
-            'status' => true,
-            'user' => $user,
-            'message' => 'Perfil atualizado com sucesso!'
-        ], 200);
     }
 
 
