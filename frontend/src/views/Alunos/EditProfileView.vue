@@ -3,14 +3,14 @@
         <DashboardComponent>
             <template v-slot:painel-perfil-alunos>
                 <header class="titlle-pages">
-                    <p>Perfil do Alunos</p>
+                    <p>Perfil do Aluno</p>
                 </header>
                 <div class="message" v-if="message" :class="{ 'success': success, 'error': !success }">{{ message }}</div>
                 <div class="contents-pages">
                     <div class="form-page">
 
                         <div class="title-form">
-                            <h2>Editar Perfil</h2>
+                            <h2>Editar Meu Perfil</h2>
                         </div>
                         <form @submit.prevent="updateUser">
                             <div class="user-field">
