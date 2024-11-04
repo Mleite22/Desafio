@@ -8,7 +8,7 @@
                 <div class="message" v-if="message" :class="{ 'success': success, 'error': !success }">{{ message }}</div>
                 <div class="contents-pages">
                     <div class="form-page">
-
+                        
                         <div class="title-form">
                             <h2>Editar Meu Perfil</h2>
                         </div>

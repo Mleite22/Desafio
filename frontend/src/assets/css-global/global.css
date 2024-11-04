@@ -52,15 +52,16 @@ html, body {
   
 .contents-pages{
   padding: 15px;
+  /* background-color: aquamarine; */
 }
 
 header {
-  padding: 15px;
+  padding: 10px;
 }
 
 .titlle-pages {
   font-size: 25px;
   font-weight: 600;
-  margin: 10px 0px;
+  margin: 0px 0px;
   color: var(--font-color-titlle);
 } 

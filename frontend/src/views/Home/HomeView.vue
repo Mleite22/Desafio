@@ -4,7 +4,7 @@
     <DashboardComponent>
       <template v-slot:painel-home>
         <div class="contents-pages">
-          <h2>Painé do Início</h2>
+          <h2>Painel</h2>
 
         </div>
       </template>
