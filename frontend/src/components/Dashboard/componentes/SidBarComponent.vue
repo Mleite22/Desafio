@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import UserServices from '@/services/UserServices';
 
 export default {
     name: 'SidBarComponent',
@@ -35,23 +35,23 @@ export default {
         };
     },
     methods: {
-        getUser() {
-            //função de Recuperar dados
-            const userId = localStorage.getItem('user_id'); // Obtém o ID do usuário do localStorage
-            if (userId) {
-                axios.get(`http://127.0.0.1:8000/api/users/${userId}`, {
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem('api_token') // Usa o token do localStorage
-                    }
-                })
-                    .then(response => {
-                        this.user = response.data.user; // resposta da sua API
-                    })
-                    .catch(error => {
-                        console.error("Erro ao buscar usuário:", error);
-                    });
-            } else {
-                console.error("Usuário não está definido");
+        /**
+         * Função Busca dados
+         */ 
+        async getUser() {
+            try {
+                const userId = localStorage.getItem('user_id');
+                const token = localStorage.getItem('api_token');
+
+                if (userId && token){
+                    this.user = await UserServices.fetchUser(userId, token);
+                } else {
+                    console.error("Usuário não encontrados.");
+                }
+
+            } catch (error) {
+                this.message = 'Erro ao carregar o perfil do usuário.';
+                
             }
         }
     },

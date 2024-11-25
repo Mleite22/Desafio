@@ -5,14 +5,15 @@
                 <header class="titlle-pages">
                     <p>Perfil do Aluno</p>
                 </header>
-                <div class="message" v-if="message" :class="{ 'success': success, 'error': !success }">{{ message }}</div>
+                <div class="message" v-if="message" :class="{ 'success': success, 'error': !success }">{{ message }}
+                </div>
                 <div class="contents-pages">
                     <div class="form-page">
-                        
+
                         <div class="title-form">
                             <h2>Editar Meu Perfil</h2>
                         </div>
-                        <form @submit.prevent="updateUser">
+                        <form @submit.prevent="handleUpdateUser">
                             <div class="user-field">
                                 <label for="name">Nome:</label>
                                 <input type="text" id="name" v-model="user.name" required />
@@ -23,12 +24,15 @@
                             </div>
                             <div class="user-field">
                                 <label for="password">Senha:</label>
-                                <input type="password" id="password" v-model="user.password"/>
+                                <input type="password" id="password" v-model="user.password" />
                             </div>
                             <small>(Deixe a senha em branco caso não queira alterar)</small>
-                            <button class="botao" type="submit">Salvar</button>
+                            <div class="form-button">
+                                <button class="botao" type="submit">Salvar</button>
+                                <!-- <button class="botao" type="#">Habilitar 2FA</button> -->
+                            </div>
                         </form>
-                        
+
                     </div>
                 </div>
             </template>
@@ -37,7 +41,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+
+import UserServices from '@/services/UserServices';
 import DashboardComponent from '@/components/Dashboard/DashboardComponent.vue';
 
 export default {
@@ -49,88 +54,71 @@ export default {
     data() {
         return {
             user: {
-                name: '',
-                email: '',
-                password: '',
+                name: null,
+                email: null,
+                password: null,
             },
             message: '',
             success: false,
         };
     },
     created() {
-        this.fetchUser();
+        this.loadUser();
     },
     methods: {
-        async fetchUser() {
-            try { 
-                //Função recupera dados
-                const userId = localStorage.getItem('user_id'); // Obtém o ID do usuário do localStorage
-                if (userId) {
-                    axios.get(`http://127.0.0.1:8000/api/users/${userId}`, {
-                        headers: {
-                            'Authorization': 'Bearer ' + localStorage.getItem('api_token') // Usa o token do localStorage
-                        }
-                    })
-                        .then(response => {
-                            this.user = response.data.user; // resposta da sua API
-                        })
-                        .catch(error => {
-                            console.error("Erro ao buscar usuário:", error);
-                        });
+        /**
+         * Função Busca dados
+         */ 
+        async loadUser() {
+            try {
+                const userId = localStorage.getItem('user_id');
+                const token = localStorage.getItem('api_token');
+
+                if (userId && token){
+                    this.user = await UserServices.fetchUser(userId, token);
                 } else {
-                    console.error("Usuário não está definido");
+                    console.error("Usuário não encontrados.");
                 }
 
             } catch (error) {
-                console.error(error);
-                this.message = 'Erro ao buscar o usuário.'
+                this.message = 'Erro ao carregar o perfil do usuário.';
+                
             }
         },
-        async updateUser() {
+
+        /**
+         * Atualiza Edita os Dados do usuário
+         */
+        async handleUpdateUser() {
             try {
-                //Função Edita Dados
                 const token = localStorage.getItem('api_token');
+
                 if (!token) {
-                    this.message = "Token de autenticação não encontrado.";
+                    this.message = 'Token não encontrado.';                    
                     return;
                 }
-
                 const userData = {
                     name: this.user.name,
-                    email: this.user.email,                   
-                    password: this.user.password ? this.user.password : undefined, // Só envia a senha se preenchida
-                    
-                };
-                
-                console.log(userData);
-                const response = await axios.patch('http://127.0.0.1:8000/api/users/profile', userData, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                this.message = response.data.message;
+                    email: this.user.email,
+                    password: this.user.password || undefined
+                }
+                this.message = await UserServices.updateUser(userData, token);
                 this.success = true;
-                //temporizador para limpar as mensagens
                 setTimeout(() => {
                     this.success = false;
                     this.message = '';
                 }, 4000);
+                
+
             } catch (error) {
-                console.error('Erro ao atualizar usuário: ', error);
                 this.message = 'Erro ao atualizar usuário.';
                 this.success = false;
                 
-                //temporizador para limpar as mensagens
-                setTimeout(() => {
-                    this.success = false;
-                    this.message = '';
-                }, 4000);
             }
         }
-
 
     },
 }
 </script>
 
-<style src="./styleEditProfile.css" scoped/>
+<style src="./styleEditProfile.css" scoped />

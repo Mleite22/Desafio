@@ -33,16 +33,18 @@ class UserRequest extends FormRequest
 
     /**
      * Retorna as regras de validação para os dados do usuário
-     *
+     * $this->user() ? $this->user()->id : null;: Este código verifica se há um usuário
+     * autenticado (o que ocorre em atualizações) e obtém seu ID. Caso contrário, 
+     * retorna null, o que serve para a criação de um novo usuário
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         //Recupera o id do usuario na edição
-        $userId = $this->route('user');
+        $userId = $this->user() ? $this->user()->id : null;
         return [
             'name' => 'sometimes|required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . auth()->id(),
+            'email' => 'required|email|unique:users,email' . ($userId ? ',' . $userId : ''),
             'password' => 'sometimes|nullable|min:6',
         ];
     }

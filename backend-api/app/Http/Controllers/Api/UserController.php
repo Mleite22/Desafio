@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use App\Services\UserRegistrationService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -60,7 +61,7 @@ class UserController extends Controller
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => bcrypt($request->password),
             ]);
             //Comitando a transação
             DB::commit();
@@ -69,13 +70,15 @@ class UserController extends Controller
                 'user' => $user,
                 'message' => 'Usuario cadastrado com sucesso',
             ], 201);
+            
         } catch (Exception $e) {
             //Desfazendo a transação
             DB::rollBack();
+        
             return response()->json([
                 'status' => false,
                 'message' => 'Erro ao cadastrar usuario',
-            ], 400);
+            ], 500);
         }
     }
 

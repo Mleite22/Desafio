@@ -7,6 +7,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -16,7 +17,7 @@ class LoginController extends Controller
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
-            if ($user) {
+            if ($user) {                
                 $token = $user->createToken('api_token')->plainTextToken;
                 return response()->json([
                     'status' => true,

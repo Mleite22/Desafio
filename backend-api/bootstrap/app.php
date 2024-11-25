@@ -14,7 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         // Adiciona o middleware de CORS
-        $middleware->append(\App\Http\Middleware\CorsMiddleware::class);  // Usar append() em vez de global()
+        $middleware->append(\App\Http\Middleware\CorsMiddleware::class);  
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //Lança exceção quando houver erro de autenticação

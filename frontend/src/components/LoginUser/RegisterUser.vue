@@ -26,14 +26,14 @@
 </template>
 
 <script>
-import axios from 'axios'
+import Api from '@/http/Api';
 export default {
   data() {
     return {
       aluno: {
         name: '',
         email: '',
-        password: ''
+        password: '',
       },
       error: null
     };
@@ -50,9 +50,12 @@ export default {
         return;
       }
       this.error = null; // Limpa qualquer erro anterior
-      axios.post('http://localhost:8000/api/users', this.aluno)
+      
+     Api().post('/users', this.aluno)
+      
         .then(response => {
           alert(`Aluno cadastrado com sucesso! name: ${response.data.user.name}`);
+
           this.aluno.name = '';
           this.aluno.email = '';
           this.aluno.password = '';
@@ -64,6 +67,9 @@ export default {
             this.error = 'Ocorreu um erro ao tentar cadastrar o aluno.';
           }
         });
+        
+      
+
     },
 
   }
