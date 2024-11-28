@@ -50,12 +50,15 @@ export default {
             this.error = null;
 
             try {
-                const { data } = await Api().post('/login', { email: this.email, password: this.password })
-                const { token, userId } = data;
+                const credentials = { email: this.email, password: this.password };
+                const response = await Api().post('/login', credentials);
+                //console.log(response.data);
 
+                const { token, user } = response.data;
+                
                 // Salva o token e o ID do usuário no localStorage
                 localStorage.setItem('api_token', token);
-                localStorage.setItem('user_id', userId); // Salva o ID do usuário
+                localStorage.setItem('user_id', user.id);
 
                 // Redireciona para a página inicial
                 this.$router.push({ name: 'home' });

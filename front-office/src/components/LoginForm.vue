@@ -1,9 +1,18 @@
 <!-- heading -->
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const email = ref('');
 const password = ref('');
+
+
+//função logar
+function logar(event: Event) {
+  event.preventDefault();
+  router.push('about');
+}
 
 </script>
 
@@ -11,13 +20,15 @@ const password = ref('');
   <div class="login">
     <h1 class="title-login">Tela de Login</h1>
   </div>
-  <form>
+  <form @submit="logar">
     <label for="">
       <span>Email</span>
-      <input type="email" v-model="email" placeholder="E-mail" name="email">
+      <!-- <input type=""  placeholder="E-mail" name="email"> -->
+      <input type="" v-model="email" placeholder="E-mail" name="email">
     </label>
     <label for="">
       <span>Senha</span>
+      <!-- <input type="password"  placeholder="Senha" name="password"> -->
       <input type="password" v-model="password" placeholder="Senha" name="password">
     </label>
     <button type="submit">Entrar</button>
