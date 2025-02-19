@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import Api from '@/http/Api';
+import UserServices from '@/services/UserServices';
 export default {
   data() {
     return {
@@ -39,7 +39,7 @@ export default {
     };
   },
   methods: {
-    cadastrarAluno() {
+    async cadastrarAluno() {
       //Validação
       if (!this.aluno.name || !this.aluno.email || !this.aluno.password) {
         this.error = 'Todos os campos são obrigatórios.';
@@ -50,25 +50,28 @@ export default {
         return;
       }
       this.error = null; // Limpa qualquer erro anterior
-      
-     Api().post('/users', this.aluno)
-      
-        .then(response => {
-          alert(`Aluno cadastrado com sucesso! name: ${response.data.user.name}`);
 
-          this.aluno.name = '';
-          this.aluno.email = '';
-          this.aluno.password = '';
-        })
-        .catch(error => {
-          if (error.response && error.response.status === 422) {
-            this.error = 'Email já cadastrado';
-          } else {
-            this.error = 'Ocorreu um erro ao tentar cadastrar o aluno.';
-          }
-        });
+      try {
+        const response = await UserServices.userRegister(this.aluno);
+        alert('Cadastro realizado com sucesso!');
+        if(response){
+          this.$router.push('/');
+          this.aluno = {
+            name: '',
+            email: '',
+            password: '',
+          };
+        }
         
-      
+      } catch (error) {
+        if (error.response && error.response.status === 422) {
+          this.error = 'Email já cadastrado';
+        } else {
+          this.error = 'Ocorreu um erro ao tentar cadastrar o aluno.';
+        }
+      }
+
+
 
     },
 

@@ -33,7 +33,7 @@ export default {
             });
             return response.data.message;
         } catch (error) {
-            console.error("Erro ao atualizar usuário:", error);
+            console.error("Erro ao atualizar usuário:", error); 
             throw error;
         }
     },
@@ -51,5 +51,15 @@ export default {
         catch (error) {
             console.error("Erro ao logar usuário:", error);
         }
+    },
+
+    //Cadastrar usuario
+    async userRegister(userData) {
+        try {
+            const response = await Api().post('/users', userData);
+            return response.data.message;
+        } catch (error) {
+            console.error("Erro ao cadastrar usuário:", error);
+        } 
     }
 }  
