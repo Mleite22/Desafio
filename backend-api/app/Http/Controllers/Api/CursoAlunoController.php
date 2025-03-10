@@ -24,10 +24,10 @@ class CursoAlunoController extends Controller
             ], 401); // Não autorizado
         }
 
-        // Recupera os cursos em que o usuário está matriculado
+        // Recuperar os cursos em que o usuário está matriculado
         $cursoAlunos = CursoAluno::where('user_id', $user->id)
-            ->with('curso') 
-            ->get(); 
+            ->with('curso')
+            ->get();
 
         return response()->json([
             'status' => true,

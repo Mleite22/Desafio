@@ -37,6 +37,8 @@
 
 <script>
 import axios from 'axios';
+// import UserServices from '@/services/UserServices';
+
 export default {
     name: 'InscreveCursoComponent',
     data() {

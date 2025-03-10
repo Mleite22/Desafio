@@ -1,7 +1,3 @@
-/**
- * axios
- * Api de conexão com o Back end
- */ 
 
 import axios, { type AxiosInstance } from 'axios';
 

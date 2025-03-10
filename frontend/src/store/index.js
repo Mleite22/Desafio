@@ -9,7 +9,7 @@ export default createStore({
   mutations: {
     SET_users(state, users) {
       state.users = users;
-    },
+    }, 
     SET_CURSOS(state, cursos) {
       state.cursos = cursos;
     }

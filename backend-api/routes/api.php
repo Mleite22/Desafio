@@ -16,35 +16,35 @@ Route::post('/login', [LoginController::class, 'login'])->name('login'); //POST 
 
 //Rotas restritas
 Route::group(['middleware' => ['auth:sanctum']], function () {
-    
+
     //logout
     Route::post('/logout', [LoginController::class, 'logout']);
 
    // Rotas de Usuários
     Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index']);
-        Route::get('/{id}', [UserController::class, 'show']); 
-        Route::patch('/profile', [UserController::class, 'update']); 
-        Route::delete('/{id}', [UserController::class, 'destroy']); 
+        Route::get('/{id}', [UserController::class, 'show']);
+        Route::patch('/profile', [UserController::class, 'update']);
+        Route::delete('/{id}', [UserController::class, 'destroy']);
     });
 
     // Rotas de Cursos
     Route::prefix('curso')->group(function () {
-        Route::get('/{id}', [CursoController::class, 'show']); 
-        Route::post('/', [CursoController::class, 'store']); 
-        Route::put('/{id}', [CursoController::class, 'update']); 
-        Route::delete('/{id}', [CursoController::class, 'destroy']); 
+        Route::get('/{id}', [CursoController::class, 'show']);
+        Route::post('/', [CursoController::class, 'store']);
+        Route::put('/{id}', [CursoController::class, 'update']);
+        Route::delete('/{id}', [CursoController::class, 'destroy']);
     });
 
     // Rotas de Curso Aluno
     Route::prefix('cursoaluno')->group(function () {
-        Route::get('/', [CursoAlunoController::class, 'index']); 
-        Route::post('/', [CursoAlunoController::class, 'store']); 
+        Route::get('/', [CursoAlunoController::class, 'index']);
+        Route::post('/', [CursoAlunoController::class, 'store']);
         Route::get('/{curso_Id}', [CursoAlunoController::class, 'show']);
     });
 });
 
-//Cadastrar ususario
+//Cadastrar usuário
 Route::post('/users', [UserController::class, 'store']); //POST - http://127.0.0.1:8000/api/users
 
 //Rotas cursos
