@@ -52,9 +52,8 @@ export default createStore<UserState>({
         },
         async registro({ commit }, { name, email, password }) {
 
-
             try {
-                const response = await resgistroService.registerUser({ name, email, password });
+                const response = await resgistroService.registerUser( name, email, password );
                 const {token, user} = response;
                 commit('setToken', token);
                 commit('setUser', user);
@@ -66,7 +65,8 @@ export default createStore<UserState>({
                 throw error;
             }
         },
-        logout({ commit }) {
+        async logout({ commit }) {
+            await loginServico.logout();
             commit('logout');
             localStorage.removeItem('token');
             localStorage.removeItem('user');

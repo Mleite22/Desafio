@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import {useStore} from "vuex";
 
+const router = useRouter();
 const store = useStore();
 const name = ref('');
 const email = ref('');
@@ -11,14 +13,20 @@ const error = ref<string | null>(null);
 const registrarUsuario = async () => {
   try {
     error.value = null;
-    await store.dispatch('registro', {
+    const response = await store.dispatch('registro', {
       name: name.value,
       email: email.value,
       password: password.value
     })
+    if (response.status) {
+      alert('Usuario cadastrado com sucesso!');
+      console.log('Usuario cadastrado com sucesso!');
+      await router.push('/');
+    } 
     console.log('Usuario cadastrado com sucesso!');
   } catch (err) {
-    error.value = 'Erro ao registrar usuário: ' + err.message;
+    alert('Erro ao registrar: ' + err.message);
+    error.value = ('Erro ao registrar: ' + err.message);
 
   }
 }
@@ -36,15 +44,33 @@ const registrarUsuario = async () => {
       <h1>Cadastrar</h1>
       <div>
         <label>Seu nome</label>
-        <input class="input" type="text"  name="name" placeholder="Nome">
+        <input 
+          class="input" 
+          type="text" 
+          v-model="name"  
+          name="name" 
+          placeholder="Nome"
+        >
       </div>
       <div>
         <label>Seu e-mail</label>
-        <input class="input" type="email"  name="email" placeholder="email@email.com.br">
+        <input 
+          class="input" 
+          type="email" 
+          v-model="email" 
+          name="email" 
+          placeholder="email@email.com.br"
+        >
       </div>
       <div>
         <label>Senha</label>
-        <input class="input" type="password"  name="password" placeholder="Minimo 6 digitos">
+        <input 
+          class="input" 
+          type="password"
+          v-model="password"  
+          name="password" 
+          placeholder="Minimo 6 digitos"
+        >
       </div>
       <button type="submit">Cadastrar</button>
 

@@ -13,5 +13,15 @@ async function autenticUser(email: string, password: string) {
         throw error;
     }
 }
+//seriço de logout
 
-export default { autenticUser }
+async function logout() {
+    try {
+        const store = createAxiosInstance();
+        await store.post("/logout");
+    } catch (error) {
+        throw error;
+    }
+}
+
+export default { autenticUser, logout };
