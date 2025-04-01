@@ -17,16 +17,17 @@ const logout = async () => {
 }
 
 onMounted(() => {
-  console.log('Dados do usuário:', user.value);
+  console.log('Usuário Logado com sucesso!');
+  // console.log('Dados do usuário:', user.value);
 });
 </script>
 
 <template>
   
-  <div class="dashboard">
+  <div class="main">
     <div>
-      <router-link to="/" @click.prevent="logout">Sair</router-li
-  </div>
+      <router-link to="/" @click.prevent="logout">Sair</router-link>
+    </div>
     <h1>Dashboard</h1>
     <div v-if="user" class="user-info">
       <h2>Bem-vindo!</h2>
@@ -36,3 +37,28 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #3a3939;
+}
+.user-info {
+  background-color: #82cf8f;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.user-info h2 {
+  margin: 0;
+  font-size: 24px;
+}
+.user-info p {
+  margin: 5px 0;
+  font-size: 18px;
+}
+</style>

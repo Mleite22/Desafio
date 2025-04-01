@@ -6,7 +6,7 @@ import LoginForm from '@/views/autenticacao/login/componente/LoginForm.vue';
 <template>
   <header>
     <div class="wrapper">
-      <img alt="banner login" class="banner" src="../../../assets/images/banner-2.jpg" />      
+      <img alt="banner login" class="banner" src="../../../assets/images/banner-2.png" />      
     </div>
   </header>
   <main>

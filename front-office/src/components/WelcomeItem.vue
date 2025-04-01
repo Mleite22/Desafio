@@ -10,7 +10,7 @@
       <slot></slot>
     </div>
   </div> -->
-  sadvadfgadffg
+
 </template>
 
 <style scoped>

@@ -18,6 +18,7 @@
         "logar",
         "normalmente",
         "obter",
+        "Primeiro",
         "Redirecionar",
         "registro",
         "seguir",
@@ -29,5 +30,8 @@
         "verificar",
         "verifique",
         "vuex"
+    ],
+    "googleTranslateExt.languages": [
+        "pt"
     ]
 }

@@ -35,7 +35,7 @@ const registrarUsuario = async () => {
 <template>
   <header>
     <div class="wrapper">
-      <img alt="banner login" class="banner" src="../../../assets/images/banner-2.jpg" />
+      <img alt="banner login" class="banner" src="../../../assets/images/banner-2.png" />
       
     </div>
   </header>
@@ -93,7 +93,7 @@ const registrarUsuario = async () => {
   align-items: center;
   /* margin: 5px 10px; */
   border-radius: 5px;
-  background: #5e49fe;
+  /* background: #5e49fe; */
 }
 input {
     margin: 10px 0;
