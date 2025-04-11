@@ -4,17 +4,26 @@ import LoginForm from '@/views/autenticacao/login/componente/LoginForm.vue';
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <img alt="banner login" class="banner" src="../../../assets/images/banner-2.png" />      
-    </div>
-  </header>
-  <main>
-    <LoginForm />
-  </main>
+  <div class="section">
+    <header>
+      <div class="wrapper">
+        <img alt="banner login" class="banner" src="../../../assets/images/banner-2.png" />      
+      </div>
+    </header>
+    <main>
+      <LoginForm />
+    </main>
+  </div>
 </template>
 
 <style scoped>
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
 header {
   height: 100vh; 
   max-height: 100vh;
@@ -32,6 +41,11 @@ header {
 }
 
 @media (min-width: 1024px) {
+  .section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+  }
   header {
     display: flex;
     place-items: center;

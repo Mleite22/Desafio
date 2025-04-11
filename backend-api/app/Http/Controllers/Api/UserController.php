@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Jobs\JobSendWelcomeEmail;
 use App\Models\User;
 use App\Services\UserRegistrationService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -63,12 +65,25 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
             ]);
+            //Verificando se o usuario foi criado
+            if (!$user) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Usuário já cadastrado ou não foi possível cadastrar',
+                ], 400);               
+            }
+            // Enviando email de boas vindas sem fila para teste
+            //Mail::to($user->email)->send(new \App\Mail\SendWelcomeEmail($user));
+
+            // Enviando email de boas vindas com fila
+            JobSendWelcomeEmail::dispatch($user->id)->onQueue('default');
+
             //Comitando a transação
             DB::commit();
             return response()->json([
                 'status' => true,
                 'user' => $user,
-                'message' => 'Usuario cadastrado com sucesso',
+                'message' => 'Usuário cadastrado com sucesso',
             ], 201);
             
         } catch (Exception $e) {
@@ -77,8 +92,8 @@ class UserController extends Controller
         
             return response()->json([
                 'status' => false,
-                'message' => 'Erro ao cadastrar usuario',
-            ], 500);
+                'message' => 'Erro ao cadastrar usuário',
+            ], 400);
         }
     }
 

@@ -45,7 +45,7 @@ const login = async () => {
     </div>
     
     <form @submit.prevent="login">
-      <div for="">
+      <div>
         <label>Email</label>
         <!-- <input type=""  placeholder="E-mail" name="email"> -->
         <input 
@@ -77,20 +77,20 @@ const login = async () => {
 
 <style scoped>
 .section {
-  width: 100%;
+  
   height: auto;
-  margin-top: 40px;
-  padding-top: 25px;
-  flex-direction: column;
+  display: grid;
   justify-content: center;
   align-items: center;
-  background: #5e49fe;
+  border-radius: 5px;
+  
+ 
 }
 
   .login {
     width: 100%;
     height: auto;
-    /* background: #5e49fe; */
+    /* background: #49fec2; */
   }
 
   .title-login {
@@ -98,48 +98,54 @@ const login = async () => {
   }
 
   form {
-  
+    width: 100%;
     display: block;
     /* flex-direction: column; */
     justify-content: center;
     align-items: center;
-  }
+    
 
-  label {
+    label {
     /* margin: 10px 0; */
+    }
+
+    input {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+    }
+
+    button {
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: auto;
+      background: #5e49fe;
+      color: #fff;
+      cursor: pointer;
+    }
   }
 
-  input {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 100%;
-  }
-
-  button {
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: auto;
-    background: #5e49fe;
-    color: #fff;
-    cursor: pointer;
-  }
+ 
 
   .link-cadastro {
     display: flex;
     justify-content: right;
     align-items: flex-end;
-    margin: 5px 10px;
+    margin: 5px 25px;
     border-radius: 5px;
 
     a {
+      font-size: large;
       text-decoration: none;
       color: #5e49fe;
     }
   }
+
+
 
 @media screen and (min-width: 768px) {
   .section {
