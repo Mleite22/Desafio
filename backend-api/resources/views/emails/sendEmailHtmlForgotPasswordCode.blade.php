@@ -11,7 +11,7 @@
         <h1>Prezado, {{ $user->name }}</h1>
         
         <p>Você solicitou um código de verificação para redefinir sua senha. O código é:</p>
-        <h2 style="color: #ffffff; background-color:#333">{{ $code }}</h2>
+        <h2 class="code">{{ $code }}</h2>
         <p>Por favor, insira este código no campo apropriado para continuar com o processo de redefinição de senha.</p>
         <p>Por questões de segurança esse código é válido somente até as {{ $formattedTime }} do dia {{ $formattedDate }}. 
             Caso esse prazo esteja expirado, será necessário solicitar outro código.</p>
@@ -49,6 +49,16 @@
         }
         h1 {
             color: #2c3e50;
+        }
+        h2.code {
+            width: auto;
+            font-size: 24px;
+            color: #ffffff;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            background-color: #333;
+            padding: 10px;  
         }
         p {
             margin-bottom: 15px;

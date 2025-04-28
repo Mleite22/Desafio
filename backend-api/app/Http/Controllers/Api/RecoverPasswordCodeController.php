@@ -35,8 +35,9 @@ class RecoverPasswordCodeController extends Controller
         }
         try {
             // Recuperar os registros recuperar senha do usuário
-            $userPasswordResets = DB::table('password_reset_tokens')
-                ->where(['email', $request->email]);
+            $userPasswordResets = DB::table('password_reset_tokens')->where([
+                ['email', $request->email]
+            ]);
 
             // Se existir token cadastrado para o usuário recuperar senha, excluir o mesmo
             if ($userPasswordResets->exists()) {
