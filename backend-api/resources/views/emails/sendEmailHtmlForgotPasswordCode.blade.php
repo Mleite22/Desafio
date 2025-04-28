@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Teste de email</title>
+    <title>Código de Verificação</title>
 </head>
 <body>
     <div class="card">
-        <h1>Olá, {{ $user->name }}</h1>
-        <p>Seja bem-vindo(a) ao nosso sistema!</p>
-        <p>Seu e-mail de cadastro é: {{ $user->email }}</p>
-        <p>Estamos felizes em tê-lo(a) conosco.</p>
+        <h1>Prezado, {{ $user->name }}</h1>
+        
+        <p>Você solicitou um código de verificação para redefinir sua senha. O código é:</p>
+        <h2 style="color: #ffffff; background-color:#333">{{ $code }}</h2>
+        <p>Por favor, insira este código no campo apropriado para continuar com o processo de redefinição de senha.</p>
+        <p>Por questões de segurança esse código é válido somente até as {{ $formattedTime }} do dia {{ $formattedDate }}. 
+            Caso esse prazo esteja expirado, será necessário solicitar outro código.</p>
+
+        <p>Se você não solicitou essa alteração, por favor, desconsidere este e-mail.</p>
         <p>Atenciosamente,</p>
-        <p>A equipe do sistema</p>
-    
-        <p>Se você não se inscreveu, por favor ignore este e-mail.</p>
+        <p>Equipe do Sistema</p>
     
         <footer>
             <p>&copy; {{ date('Y') }} Sistema. Todos os direitos reservados.</p>
@@ -82,13 +85,6 @@
     <script>
         // JavaScript can be added here if needed
         console.log('Email template loaded');
-        // You can add more functionality as per your requirements
-        // For example, you can track email opens or clicks using a tracking pixel
-        // or link click events.
-        // Example of a tracking pixel
-        // var img = new Image();
-        // img.src = 'https://example.com/tracking-pixel?email={{ $user->email }}';
-        // document.body.appendChild(img);
     </script>
     
 </body>

@@ -15,6 +15,21 @@ a,
   transition: 0.4s;
   padding: 3px;
 }
+/* p {
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1.5;
+} */
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.5;
+  color: hsla(160, 100%, 37%, 1);
+}
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
 
 @media (hover: hover) {
   a:hover {

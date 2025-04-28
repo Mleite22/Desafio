@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CursoAlunoController;
 use App\Http\Controllers\Api\CursoController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\RecoverPasswordCodeController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Middleware\CorsMiddleware;
 use Illuminate\Http\Request;
@@ -50,3 +51,7 @@ Route::post('/users', [UserController::class, 'store']); //POST - http://127.0.0
 //Rotas cursos
 Route::get('/curso', [CursoController::class, 'index']); //GET - http://127.0.0.1:8000/api/curso?page=1
 
+// Recuperar senha
+Route::post("/forgot-password-code", [RecoverPasswordCodeController::class, 'forgotPasswordCode']);
+Route::post("/reset-password-validate-code", [RecoverPasswordCodeController::class, 'resetPasswordValidateCode']);
+Route::post("/reset-password-code", [RecoverPasswordCodeController::class, 'resetPasswordCode']);

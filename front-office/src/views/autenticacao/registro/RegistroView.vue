@@ -1,126 +1,29 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import {useStore} from "vuex";
-
-const router = useRouter();
-const store = useStore();
-const name = ref('');
-const email = ref('');
-const password = ref('');
-const error = ref<string | null>(null);
-
-const registrarUsuario = async () => {
-  try {
-    error.value = null;
-    const response = await store.dispatch('registro', {
-      name: name.value,
-      email: email.value,
-      password: password.value
-    })
-    if (response.status) {
-      alert('Usuario cadastrado com sucesso!');
-      console.log('Usuario cadastrado com sucesso!');
-      await router.push('/');
-    } 
-    console.log('Usuario cadastrado com sucesso!');
-  } catch (err) {
-    alert('Erro ao registrar: ' + err.message);
-    error.value = ('Erro ao registrar: ' + err.message);
-
-  }
-}
+import RegistroForm from './componente/RegistroForm.vue';
 
 </script>
+
 <template>
-  <header>
-    <div class="wrapper">
-      <img alt="banner login" class="banner" src="../../../assets/images/banner-2.png" />
-      
-    </div>
-  </header>
-  <div class="registro">
-    <form class="form-registro" @submit.prevent="registrarUsuario">
-      <h1>Cadastrar</h1>
-      <div>
-        <label>Seu nome</label>
-        <input 
-          class="input" 
-          type="text" 
-          v-model="name"  
-          name="name" 
-          placeholder="Nome"
-        >
+  <div class="section">
+    <header>
+      <div class="wrapper">
+        <img alt="banner login" class="banner" src="../../../assets/images/banner-2.png" />      
       </div>
-      <div>
-        <label>Seu e-mail</label>
-        <input 
-          class="input" 
-          type="email" 
-          v-model="email" 
-          name="email" 
-          placeholder="email@email.com.br"
-        >
-      </div>
-      <div>
-        <label>Senha</label>
-        <input 
-          class="input" 
-          type="password"
-          v-model="password"  
-          name="password" 
-          placeholder="Minimo 6 digitos"
-        >
-      </div>
-      <button type="submit">Cadastrar</button>
-
-      <div v-if="error" class="error">
-        <p>{{ error }}</p>
-      </div>
-
-    </form>
-
+    </header>
+    <main>
+      <RegistroForm />
+    </main>
   </div>
-
 </template>
 
 <style>
-.form-registro {
-  width: 100%;
-  height: auto;
-  display: grid;
-  justify-content: center;
+.section {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  /* margin: 5px 10px; */
-  border-radius: 5px;
-  /* background: #5e49fe; */
+  justify-content: center;
+  
 }
-input {
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 100%;
-  }
-
-  button {
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: auto;
-    background: #5e49fe;
-    color: #fff;
-    cursor: pointer;
-  }
-@media (min-width: 1024px) {
-  .registro {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-
 header {
   height: 100vh; 
   max-height: 100vh;
@@ -138,6 +41,11 @@ header {
 }
 
 @media (min-width: 1024px) {
+  .section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+  }
   header {
     display: flex;
     place-items: center;

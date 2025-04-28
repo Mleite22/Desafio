@@ -2,32 +2,33 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useStore } from 'vuex';
-
+import {useStore} from "vuex";
 
 const router = useRouter();
-const store  = useStore();
-
+const store = useStore();
+const name = ref('');
 const email = ref('');
 const password = ref('');
-const errorMessage = ref("");
+const error = ref<string | null>(null);
 
-//função logar
-const login = async () => {
+const registrarUsuario = async () => {
   try {
-    const response = await store.dispatch('login', {
+    error.value = null;
+    const response = await store.dispatch('registro', {
+      name: name.value,
       email: email.value,
       password: password.value
-    });
-
-    if (response.status ) {
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
-      await router.push('dashboard');
+    })
+    if (response.status) {
+      alert('Cadastrado com sucesso! Confira sue e-mail para confirmar o registro.');
+      console.log('Cadastrado com sucesso! Confira sue e-mail para confirmar o registro.');
+      await router.push('/');
     } 
-  } catch (error) {
-    errorMessage.value = 'Erro ao fazer login. Verifique suas credenciais.';
-    console.error('Login failed:', error);
+    console.log('Usuario cadastrado com sucesso!');
+  } catch (err) {
+    alert('Erro ao registrar: ' + err.message);
+    error.value = ('Erro ao registrar: ' + err.message);
+
   }
 }
 
@@ -36,39 +37,46 @@ const login = async () => {
 <template>
   
   <div class="section">
-        
-    <form @submit.prevent="login">
-      <div class="login">
-        <h1 class="title-login">Tela de Login</h1>
+
+    
+    <form @submit.prevent="registrarUsuario">
+      <div class="resgistro">
+        <h1 class="title-resgistro">Cadastrar</h1>
       </div>
       <div>
-        <label>Email</label>
-        <!-- <input type=""  placeholder="E-mail" name="email"> -->
+        <label>Seu nome</label>
         <input 
+          class="input" 
+          type="text" 
+          v-model="name"  
+          name="name" 
+          placeholder="Nome"
+        >
+      </div>
+      <div>
+        <label>Seu e-mail</label>
+        <input 
+          class="input" 
           type="email" 
-          id="email"
           v-model="email" 
-          placeholder="E-mail" 
-          name="email"
-          autocomplete="email"
+          name="email" 
+          placeholder="email@email.com.br"
         >
       </div>
-      <div for="">
+      <div>
         <label>Senha</label>
-        
         <input 
-          type="password" 
-          id="password"
-          v-model="password" 
-          placeholder="Senha" 
-          name="password"
-          autocomplete="current-password"
+          class="input" 
+          type="password"
+          v-model="password"  
+          name="password" 
+          placeholder="Minimo 6 digitos"
         >
       </div>
-      <button type="submit">Entrar</button>
-      <div class="link-cadastro">
+      <button type="submit">Cadastrar</button>
+      <div class="link-login">
       <!-- link do cadastro -->
-      <a href="registro">Cadastre-se</a>
+      <a href="/">Retornar Login</a>
     </div>
     </form>
   </div>
@@ -87,13 +95,13 @@ const login = async () => {
  
 }
 
-  .login {
+  .resgistro {
     width: 100%;
     height: auto;
     /* background: #49fec2; */
   }
 
-  .title-login {
+  .title-resgistro {
     text-align: center;
   }
 
@@ -128,7 +136,7 @@ const login = async () => {
 
  
 
-  .link-cadastro {
+  .link-login {
     display: flex;
     justify-content: left;
     align-items: flex-end;
@@ -141,6 +149,9 @@ const login = async () => {
       color: #5e49fe;
     }
   }
+
+
+  
 
 
 

@@ -1,64 +1,43 @@
 <script setup lang="ts">
-import { useStore } from 'vuex';
-import { computed, onMounted } from 'vue';
-import router from '@/router';
+import Navbar from './navbar/navbar.vue';
+import Sidebar from './sidebar/sidebar.vue';
 
-const store = useStore();
-const user = computed(() => store.getters.getUser);
-
-const logout = async () => {
-  try{
-    await store.dispatch('logout');
-    router.push('/');
-  } catch (error) {
-    console.log("Erro ao fazer o logout: ", error)
-  }
-  
-}
-
-onMounted(() => {
-  console.log('Usuário Logado com sucesso!');
-  // console.log('Dados do usuário:', user.value);
-});
 </script>
 
 <template>
   
-  <div class="main">
-    <div>
-      <router-link to="/" @click.prevent="logout">Sair</router-link>
+  <div class="conteiner">
+    <Sidebar />
+    <div class="main">
+      <div class="header">
+        <Navbar />
+
+      </div>    
     </div>
-    <h1>Dashboard</h1>
-    <div v-if="user" class="user-info">
-      <h2>Bem-vindo!</h2>
-      <p>Nome: {{ user.name }}</p>
-      <p>Email: {{ user.email }}</p>
-      <p>ID: {{ user.id }}</p>
-    </div>
+    
   </div>
 </template>
 
 <style scoped>
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.conteiner { 
+  display: flex; /* Define o layout flexível */
+  flex-direction: row;
+  width: 100%;
   height: 100vh;
-  background: #3a3939;
+  background: #181818;
 }
-.user-info {
-  background-color: #82cf8f;
-  padding: 20px;
-  border-radius: 8px;
+.main {
+  flex: 1; /* Permite que o elemento principal ocupe o restante do espaço */ 
+  background-color: #1f1f1f;
+}
+.header {
+  height: 60px; /* Altura fixa para o cabeçalho */
+  align-items: center;
+  display: flex; /* Adicionando display flex para alinhar itens */
+  justify-content: right; /* Alinhando itens à direita */
+  padding: 0 20px; /* Adicionando espaçamento interno */
+  background-color: #181818; /* Updated background color */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.user-info h2 {
-  margin: 0;
-  font-size: 24px;
-}
-.user-info p {
-  margin: 5px 0;
-  font-size: 18px;
-}
+
 </style>

@@ -73,10 +73,10 @@ class UserController extends Controller
                 ], 400);               
             }
             // Enviando email de boas vindas sem fila para teste
-            //Mail::to($user->email)->send(new \App\Mail\SendWelcomeEmail($user));
+            Mail::to($user->email)->send(new \App\Mail\SendWelcomeEmail($user));
 
             // Enviando email de boas vindas com fila
-            JobSendWelcomeEmail::dispatch($user->id)->onQueue('default');
+            //JobSendWelcomeEmail::dispatch($user->id)->onQueue('default');
 
             //Comitando a transação
             DB::commit();
