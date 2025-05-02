@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ForgotPasswordRequest;
+use App\Http\Requests\ResetPasswordCodeRequest;
+use App\Http\Requests\ResetPasswordValidateCodeRequest;
 use App\Mail\SendEmailForgotPasswordCode;
 use App\Models\User;
+use App\Service\ResetPasswordValidateCodeService;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -14,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use PhpParser\Node\Stmt\TryCatch;
 
 class RecoverPasswordCodeController extends Controller
 {
@@ -25,6 +29,7 @@ class RecoverPasswordCodeController extends Controller
     {
         // Recuperar os dados do usuário no banco de dados com o e-mail
         $user = User::where('email', $request->email)->first();
+
         // Verifica se o usuário existe
         if (!$user) {
             //Salvar log
@@ -85,6 +90,117 @@ class RecoverPasswordCodeController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => 'Erro ao recuperar a senha.',
+            ], 400);
+        }
+    }
+
+    public function resetPasswordValidateCode(ResetPasswordValidateCodeRequest $request, ResetPasswordValidateCodeService $resetPasswordValidateCode): JsonResponse
+    {
+        try {
+            // validar o código do token
+            $validationResult = $resetPasswordValidateCode->resetPasswordValidateCode($request->email, $request->code);
+
+            // Verifica o resultado da validação
+            if (!$validationResult['status']){
+
+                return response()->json([
+                    'status' => false,
+                    'message' => $validationResult['message'],
+                ], 400);
+            }
+            // Recuperar os dados do usuário no banco de dados com o e-mail
+            $user = User::where('email', $request->email)->first();
+
+            // Verifica se o usuário existe
+            if (!$user) {
+
+                //Salvar log
+                Log::notice('Usuário não encontrado.', ['email' => $request->email]);
+                return response()->json([
+                    'status' => false,
+                    'error' => 'Usuário não encontrado.'
+                ], 400);
+            }
+
+            // Salvar log
+            Log::info('Código de recuperação de senha validado.', ['email' => $request->email]);
+            return response()->json([
+                'status' => true,
+                'message' => 'Código de recuperação de senha validado com sucesso.',
+            ], 200);
+
+        } catch (Exception $e){
+
+            // Salvar log
+            Log::warning('Erro validar código recuperar senha.', ['email' => $request->email, 'error' => $e->getMessage()]);
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Código inválido!',
+            ], 400);
+        }
+    }
+
+    public function resetPasswordCode(ResetPasswordCodeRequest $request, ResetPasswordValidateCodeService $resetPasswordValidateCode): JsonResponse
+    {
+        // validar o código do token
+        $validationResult = $resetPasswordValidateCode->resetPasswordValidateCode($request->email, $request->code);
+
+        // Verifica o resultado da validação
+        if (!$validationResult['status']){
+
+            return response()->json([
+                'status' => false,
+                'message' => $validationResult['message'],
+            ], 400);
+        }
+        try {
+            // Recuperar os dados do usuário no banco de dados com o e-mail
+            $user = User::where('email', $request->email)->first();
+
+            // Verifica se o usuário existe
+            if (!$user) {
+                //Salvar log
+                Log::warning('Usuário não encontrado.', ['email' => $request->email]);
+                return response()->json([
+                    'status' => false,
+                    'error' => 'Usuário não encontrado.'
+                ], 400);
+            }
+
+            // Atualizar a senha do usuário
+            $user->update([
+                'password' => Hash::make($request->password),
+            ]);
+
+            // gerar o token
+            $token = $user->first()->createToken('api-token')->plainTextToken;
+
+            // Recuperar os registros recuperar senha do usuário
+            $userPasswordResets = DB::table('password_reset_tokens')->where([
+                ['email', $request->email]
+            ]);
+            // Se existir token cadastrado para o usuário recuperar senha, excluir o mesmo
+            if ($userPasswordResets->exists()) {
+                $userPasswordResets->delete();
+            }
+
+            // Salvar log
+            Log::info('Senha redefinida com sucesso.', ['email' => $request->email]);
+
+            return response()->json([
+                'status' => true,
+                'user' => $user,
+                'token' => $token,
+                'message' => 'Senha redefinida com sucesso.',
+            ], 200);
+
+        } catch (Exception $e) {
+            //Salvar log
+            Log::warning('Erro ao redefinir a senha.', ['email' => $request->email, 'error' => $e->getMessage()]);
+            return response()->json([
+                'status' => false,
+                'message' => 'Erro ao redefinir a senha.',
             ], 400);
         }
     }

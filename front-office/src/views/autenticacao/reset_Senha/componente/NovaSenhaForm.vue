@@ -10,26 +10,35 @@ const store  = useStore();
 
 const email = ref('');
 const password = ref('');
+const codigo = ref('');
 const errorMessage = ref("");
 
-//função logar
-const login = async () => {
+// Função para nova senha
+const novasenha = async () => {
   try {
-    const response = await store.dispatch('login', {
+    if (!email.value || !password.value || !codigo.value) {
+      errorMessage.value = 'Todos os campos são obrigatórios.';
+      return;
+    }
+
+    const response = await store.dispatch('atualizarSenha', {
       email: email.value,
-      password: password.value
+      password: password.value, 
+      codigo: codigo.value,
     });
 
-    if (response.status ) {
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
-      await router.push('dashboard');
-    } 
+    console.log(response);
+    router.push('/');
   } catch (error) {
-    errorMessage.value = 'Erro ao fazer login. Verifique suas credenciais.';
-    console.error('Login failed:', error);
+    if (error.response && error.response.data && error.response.data.message) {
+      errorMessage.value = error.response.data.message;
+    } else {
+      errorMessage.value = 'Erro ao atualizar a senha. Tente novamente.';
+    }
+    console.error('Erro ao atualizar senha:', error);
   }
-}
+};
+
 
 </script>
 
@@ -37,13 +46,12 @@ const login = async () => {
   
   <div class="section">
         
-    <form @submit.prevent="login">
+    <form @submit.prevent="novasenha">
       <div class="login">
-        <h1 class="title-login">Tela de Login</h1>
+        <h1 class="title-login">Nova Senha</h1>
       </div>
       <div>
         <label>Email</label>
-        <!-- <input type=""  placeholder="E-mail" name="email"> -->
         <input 
           type="email" 
           id="email"
@@ -60,16 +68,25 @@ const login = async () => {
           type="password" 
           id="password"
           v-model="password" 
-          placeholder="Senha" 
+          placeholder="Digite sua nova senha" 
           name="password"
-          autocomplete="current-password"
+          autocomplete="off"
         >
       </div>
-      <button type="submit">Entrar</button>
-      <div class="link">
-        <!-- link do cadastro -->
-        <a href="registro">Cadastre-se</a>
-        <a href="ResetSenha">Esqueci a senha</a>
+      <div>
+        <label>Código</label>        
+        <input 
+          type="text" 
+          id="codigo"
+          v-model="codigo"
+          placeholder="Digite o código recebido" 
+          name="codigo"
+          autocomplete="off"
+        >
+      </div>
+      <button type="submit">Alterar Senha</button>
+      <div v-if="errorMessage" class="error-message">
+        {{ errorMessage }}
       </div>
     </form>
   </div>

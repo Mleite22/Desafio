@@ -19,6 +19,21 @@ const router = createRouter({
       name: 'dashboard',
       component: () => import('@/views/dashboard/Dashboard.vue'),
       meta: { requiresAuth: true },
+    },
+    {
+      path: '/ResetSenha',
+      name: 'ResetSenha',
+      component: () => import('@/views/autenticacao/reset_Senha/ResetSenha.vue'),
+    },
+    {
+      path: '/ValidaCodigo',
+      name: 'ValidaCodigoEmail',
+      component: () => import('@/views/autenticacao/reset_Senha/ValidaCodigoEmail.vue'),
+    },
+    {
+      path: '/NovaSenha',
+      name: 'NovaSenha',
+      component: () => import('@/views/autenticacao/reset_Senha/NovaSenha.vue'),
     }
   ],
 })

@@ -83,6 +83,9 @@
             h1 {
                 font-size: 24px;
             }
+            h2.code {
+                font-size: 20px;
+            }
             p {
                 font-size: 16px;
             }

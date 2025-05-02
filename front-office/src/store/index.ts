@@ -1,6 +1,8 @@
 import { createStore } from 'vuex'
 import loginServico from '@/services/autenticacao/loginServico';
 import resgistroService from "@/services/registro/resgistroService";
+import recuperarSenhaService from '@/services/resetSenha/recuperarSenhaService';
+
 
 interface UserState {
     user: {
@@ -71,6 +73,39 @@ export default createStore<UserState>({
             localStorage.removeItem('token');
             localStorage.removeItem('user');
 
+        },
+        async recuperSenha({ commit }, { email }) {
+            try {
+                const response = await recuperarSenhaService.recuperarSenha(email);
+                console.log('Resposta do serviço de recuperação de senha:', response);
+                return response;
+            } catch (error) {
+                console.log('Erro ao recuperar senha:', error);
+                throw error;
+            }
+        },
+        async validarCodigo({ commit }, { email, codigo }) {
+            try {
+                const response = await recuperarSenhaService.validarCodigo(email, codigo);
+                console.log('Validado com sucesso!', response);
+                return response;
+            } catch (error) {
+                console.log('Erro ao validar código:', error);
+                throw error;
+            }
+            
+        },
+        async atualizarSenha({ commit }, { email, codigo, password }) {
+            try {
+                const response = await recuperarSenhaService.atualizarSenha(email, codigo, password); // Use "password" aqui
+                commit('setToken', response.token);
+                commit('setUser', response.user);
+                console.log('Senha atualizada com sucesso!', response);
+                return response;
+            } catch (error) {
+                console.log('Erro ao atualizar senha:', error);
+                throw error;
+            }
         },
     },
     getters: {

@@ -2,33 +2,23 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+
 import { useStore } from 'vuex';
 
-
+const store = useStore();
 const router = useRouter();
-const store  = useStore();
 
 const email = ref('');
-const password = ref('');
-const errorMessage = ref("");
 
-//função logar
-const login = async () => {
-  try {
-    const response = await store.dispatch('login', {
-      email: email.value,
-      password: password.value
-    });
-
-    if (response.status ) {
-      localStorage.setItem('token', response.token);
-      localStorage.setItem('user', JSON.stringify(response.user));
-      await router.push('dashboard');
-    } 
-  } catch (error) {
-    errorMessage.value = 'Erro ao fazer login. Verifique suas credenciais.';
-    console.error('Login failed:', error);
-  }
+async function handleRecuperarSenha(email:string){
+    try {
+        const response = await store.dispatch('recuperSenha', { email });
+        alert(response.message); // Exibe a mensagem de sucesso
+        // Redireciona para a página de validação do código
+        await router.push({ name: 'ValidaCodigoEmail' });        
+    } catch (error) {
+        alert('Erro ao recuperar senha. Tente novamente.');
+    }
 }
 
 </script>
@@ -37,40 +27,24 @@ const login = async () => {
   
   <div class="section">
         
-    <form @submit.prevent="login">
+    <form @submit.prevent="handleRecuperarSenha(email)">
       <div class="login">
-        <h1 class="title-login">Tela de Login</h1>
+        <h1 class="title-login">Recuperar Senha</h1>
       </div>
       <div>
         <label>Email</label>
         <!-- <input type=""  placeholder="E-mail" name="email"> -->
         <input 
           type="email" 
-          id="email"
-          v-model="email" 
-          placeholder="E-mail" 
+          id="email"          
+          v-model="email"
+          placeholder="Digite seu e-mail cadastrado" 
           name="email"
           autocomplete="email"
         >
       </div>
-      <div>
-        <label>Senha</label>
-        
-        <input 
-          type="password" 
-          id="password"
-          v-model="password" 
-          placeholder="Senha" 
-          name="password"
-          autocomplete="current-password"
-        >
-      </div>
-      <button type="submit">Entrar</button>
-      <div class="link">
-        <!-- link do cadastro -->
-        <a href="registro">Cadastre-se</a>
-        <a href="ResetSenha">Esqueci a senha</a>
-      </div>
+    
+      <button type="submit">Enviar</button>
     </form>
   </div>
 

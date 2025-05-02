@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ForgotPasswordRequest extends FormRequest
+class ResetPasswordValidateCodeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +16,7 @@ class ForgotPasswordRequest extends FormRequest
         return true;
     }
 
-   /**
+    /**
      * Manipular falha de validação e retornar uma resposta JSON com os erros de validação.
      *
      * @param  \Illuminate\Contracts\Validation\Validator  $validator O objeto de validação que contém os erros de validação.
@@ -24,28 +24,37 @@ class ForgotPasswordRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator)
     {
-        throw new HttpResponseException(response()->json([
-            'status' => false,
-            'errors' => $validator->errors(),
-        ], 422));
+        throw new HttpResponseException(
+            response()->json([
+                'status' => 'false',
+                'errors' => $validator->errors(),
+            ], 422)
+        );
     }
 
+    /**
+     * Retorna as regras de validação para os dados do usuário.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
     public function rules(): array
     {
         return [
+            'code' => 'required',
             'email' => 'required|email',
         ];
     }
 
-     /**
-     * Retorna as mensagens de erro personalizadas para as regras(rules) de validação.
+    /**
+     * Retorna as mensagens de erro personalizadas para as regras de validação.
      *
-     * @return array
+     * @return array<string, string>
      */
     public function messages(): array
     {
         return [
-            'email.required' => 'O campo de e-mail é obrigatório.',
+            'code.required' => 'O código é obrigatório.',
+            'email.required' => 'O e-mail é obrigatório.',
             'email.email' => 'O e-mail deve ser um endereço de e-mail válido.',
         ];
     }
