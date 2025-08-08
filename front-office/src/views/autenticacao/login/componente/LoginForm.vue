@@ -71,6 +71,9 @@ const login = async () => {
         <a href="registro">Cadastre-se</a>
         <a href="ResetSenha">Esqueci a senha</a>
       </div>
+      <div v-if="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
     </form>
   </div>
 
@@ -146,7 +149,11 @@ const login = async () => {
     }
   }
 
-
+  .error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+  }
 
 @media screen and (min-width: 768px) {
   .section {

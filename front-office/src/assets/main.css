@@ -15,11 +15,12 @@ a,
   transition: 0.4s;
   padding: 3px;
 }
-/* p {
+
+p {
   color: var(--color-text);
   font-size: 1rem;
   line-height: 1.5;
-} */
+}
 
 h1 {
   font-size: 2rem;

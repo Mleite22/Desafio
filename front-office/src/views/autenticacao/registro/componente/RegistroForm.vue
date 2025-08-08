@@ -78,6 +78,9 @@ const registrarUsuario = async () => {
       <!-- link do cadastro -->
       <a href="/">Retornar Login</a>
     </div>
+      <div v-if="error" class="error-message">
+        {{ error }}
+      </div>
     </form>
   </div>
 
@@ -151,7 +154,11 @@ const registrarUsuario = async () => {
   }
 
 
-  
+  .error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+  }
 
 
 
