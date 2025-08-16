@@ -26,11 +26,12 @@ onMounted(() => {
         <div>
         </div>
         <div v-if="user" class="user-info">
-            <h2>Dashboard</h2>
-            <p>Bem-vindo!</p>
-            <p>Nome: {{ user.name }}</p>
-            <p>Email: {{ user.email }}</p>
-            <p>ID: {{ user.id }}</p>
+            <h2>DB Cursos</h2>
+            <p>{{ user.name }}</p>
+            <div class="menu-lateral">
+                <router-link to="/home" class="menu-item"><p>Home</p></router-link>
+                <router-link to="/perfil" class="menu-item"><p>Meu Perfil</p></router-link>
+            </div>
             <router-link to="/" @click.prevent="logout" class="logout-link">Sair</router-link>
         </div>
     </div>
@@ -40,25 +41,36 @@ onMounted(() => {
 .user-info {
     width: 100%;
     height: 100vh;
-    background-color: #181818;
+    margin: 0;
+    font-size: 24px;
+    background-color: var(--vt-c-black);
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.user-info {
-    margin: 0;
-    font-size: 24px;
-}
+
 .user-info p {
     margin: 5px 0;
     font-size: 1rem;
 }
+
 .logout-link {
     color: hsla(160, 100%, 37%, 1);
-    text-decoration: none;
     font-size: 1rem;
-    
-    .logout-link:hover {
-        text-decoration: underline; /* Added hover effect for logout link */
+    padding: 0 10px;
+}
+.menu-lateral {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    .menu-item {
+        display: block;
+        color: #fff;        
+        padding: 5px 10px;
+
+        &:hover {
+            background-color: var(--vt-c-black-soft);
+            border-radius: 5px;
+        }
     }
 }
 </style>

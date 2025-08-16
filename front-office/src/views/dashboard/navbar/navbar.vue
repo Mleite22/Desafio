@@ -16,9 +16,9 @@ const user = computed(() => store.getters.getUser);
 
 // }
 
-// onMounted(() => {
-//     console.log('Usuário Logado com sucesso!');
-// });
+onMounted(() => {
+    console.log('Usuário Logado com sucesso!');
+});
 </script>
 <template>
     <div>
