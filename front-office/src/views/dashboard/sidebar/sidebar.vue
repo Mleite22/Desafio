@@ -26,7 +26,7 @@ onMounted(() => {
         <div>
         </div>
         <div v-if="user" class="user-info">
-            <h1>Dashboard</h1>
+            <h2>Dashboard</h2>
             <p>Bem-vindo!</p>
             <p>Nome: {{ user.name }}</p>
             <p>Email: {{ user.email }}</p>

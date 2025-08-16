@@ -15,9 +15,9 @@ const router = createRouter({
       component: () => import('@/views/autenticacao/registro/RegistroView.vue'),
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: () => import('@/views/dashboard/Dashboard.vue'),
+      path: '/home',
+      name: 'home',
+      component: () => import('@/views/home/Home.vue'),
       meta: { requiresAuth: true },
     },
     {
@@ -34,7 +34,13 @@ const router = createRouter({
       path: '/NovaSenha',
       name: 'NovaSenha',
       component: () => import('@/views/autenticacao/reset_Senha/NovaSenha.vue'),
-    }
+    },
+    // {
+    //   path: '/painel',
+    //   name: 'Painel',
+    //   component: () => import('@/views/dashboard/painel/Painel.vue'),
+    //   meta: { requiresAuth: true },
+    // }
   ],
 })
 

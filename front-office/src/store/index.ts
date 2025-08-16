@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 import loginServico from '@/services/autenticacao/loginServico';
 import resgistroService from "@/services/registro/resgistroService";
 import recuperarSenhaService from '@/services/resetSenha/recuperarSenhaService';
+import cursoAluno from '@/services/cursoAluno/cursoAluno';
 
 
 interface UserState {
@@ -37,6 +38,7 @@ export default createStore<UserState>({
         },
     },
     actions: {
+        // Inicializar o store
         initializeStore({ commit }) {
             const token = localStorage.getItem('token');
             const user = JSON.parse(localStorage.getItem('user') || 'null');
@@ -46,12 +48,14 @@ export default createStore<UserState>({
                 commit('setUser', user);
             }
         },
+        // Login do usuário
         async login({ commit }, { email, password }) {
             const store = await loginServico.autenticUser(email, password);
             commit('setToken', store.token);
             commit('setUser', store.user);
             return store;
         },
+        // Registro novo usuário
         async registro({ commit }, { name, email, password }) {
 
             try {
@@ -67,6 +71,7 @@ export default createStore<UserState>({
                 throw error;
             }
         },
+        // Logout Sair do sistema
         async logout({ commit }) {
             await loginServico.logout();
             commit('logout');
@@ -74,6 +79,7 @@ export default createStore<UserState>({
             localStorage.removeItem('user');
 
         },
+        // Recuperar senha
         async recuperSenha({ commit }, { email }) {
             try {
                 const response = await recuperarSenhaService.recuperarSenha(email);
@@ -84,6 +90,7 @@ export default createStore<UserState>({
                 throw error;
             }
         },
+        // Validar código enviado pro email
         async validarCodigo({ commit }, { email, codigo }) {
             try {
                 const response = await recuperarSenhaService.validarCodigo(email, codigo);
@@ -95,6 +102,7 @@ export default createStore<UserState>({
             }
             
         },
+        // Atualizar senha
         async atualizarSenha({ commit }, { email, codigo, password }) {
             try {
                 const response = await recuperarSenhaService.atualizarSenha(email, codigo, password); // Use "password" aqui
@@ -104,6 +112,17 @@ export default createStore<UserState>({
                 return response;
             } catch (error) {
                 console.log('Erro ao atualizar senha:', error);
+                throw error;
+            }
+        },
+        // Lista de cursos do aluno
+        async getCursoAluno({  }) {
+            try {
+                const response = await cursoAluno.getCursoAluno();
+                // Não precisa de commit de token/user aqui
+                return response;
+            } catch (error) {
+                console.error('Erro ao obter curso do aluno:', error);
                 throw error;
             }
         },

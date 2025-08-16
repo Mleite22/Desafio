@@ -24,4 +24,4 @@ async function logout() {
     }
 }
 
-export default { autenticUser, logout };
+export default { autenticUser, logout }; 

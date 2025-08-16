@@ -23,13 +23,14 @@ const login = async () => {
     if (response.status ) {
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));
-      await router.push('dashboard');
+      await router.push('home');
     } 
   } catch (error) {
     errorMessage.value = 'Erro ao fazer login. Verifique suas credenciais.';
     console.error('Login failed:', error);
   }
 }
+
 
 </script>
 
