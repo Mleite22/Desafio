@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Navbar from '@/views/dashboard/navbar/navbar.vue';
-import Sidebar from '@/views/dashboard/sidebar/sidebar.vue';
+import Navbar from '@/views/layout/navbar/navbar.vue';
+import Sidebar from '@/views/layout/sidebar/sidebar.vue';
 
 
 
@@ -19,7 +19,7 @@ import Sidebar from '@/views/dashboard/sidebar/sidebar.vue';
                 </slot>
                 <slot name="painel-curso">
                 </slot>
-                <slot name="painel-perfil-alunos">
+                <slot name="painel-meu-perfil">
                 </slot>
                 <slot name="painel-meuscurso">
                 </slot>

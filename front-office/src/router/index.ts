@@ -35,12 +35,12 @@ const router = createRouter({
       name: 'NovaSenha',
       component: () => import('@/views/autenticacao/reset_Senha/NovaSenha.vue'),
     },
-    // {
-    //   path: '/painel',
-    //   name: 'Painel',
-    //   component: () => import('@/views/dashboard/painel/Painel.vue'),
-    //   meta: { requiresAuth: true },
-    // }
+    {
+      path: '/perfil',
+      name: 'Perfil',
+      component: () => import('@/views/perfil_aluno/PerfilAluno.vue'),
+      meta: { requiresAuth: true },
+    }
   ],
 })
 

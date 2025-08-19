@@ -27,7 +27,6 @@ onMounted(() => {
         </div>
         <div v-if="user" class="user-info">
             <h2>DB Cursos</h2>
-            <p>{{ user.name }}</p>
             <div class="menu-lateral">
                 <router-link to="/home" class="menu-item"><p>Home</p></router-link>
                 <router-link to="/perfil" class="menu-item"><p>Meu Perfil</p></router-link>
@@ -41,7 +40,6 @@ onMounted(() => {
 .user-info {
     width: 100%;
     height: 100vh;
-    margin: 0;
     font-size: 24px;
     background-color: var(--vt-c-black);
     padding: 20px;
@@ -54,9 +52,12 @@ onMounted(() => {
 }
 
 .logout-link {
-    color: hsla(160, 100%, 37%, 1);
-    font-size: 1rem;
+    font-size: large;
     padding: 0 10px;
+
+     &:hover {            
+            border-radius: 5px;
+        }
 }
 .menu-lateral {
     margin-top: 15px;
