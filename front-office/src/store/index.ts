@@ -3,6 +3,7 @@ import loginServico from '@/services/autenticacao/loginServico';
 import resgistroService from "@/services/registro/resgistroService";
 import recuperarSenhaService from '@/services/resetSenha/recuperarSenhaService';
 import cursoAluno from '@/services/cursoAluno/cursoAluno';
+import editarPerfilUser from '@/services/editar_perfil/editarPerfilUser';
 
 
 interface UserState {
@@ -101,6 +102,19 @@ export default createStore<UserState>({
                 throw error;
             }
             
+        },
+        // Editar perfil do usuário
+        async editarPerfil({ commit }, userData) {
+            try {
+                const response = await editarPerfilUser(userData);
+                commit('setToken', response.token);
+                commit('setUser', response.user);
+                console.log('Perfil atualizado com sucesso!', response);
+                return response;
+            } catch (error) {
+                console.log('Erro ao atualizar perfil:', error);
+                throw error;
+            }
         },
         // Atualizar senha
         async atualizarSenha({ commit }, { email, codigo, password }) {

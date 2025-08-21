@@ -11,7 +11,7 @@
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: var(--advice-color-green);
   transition: 0.4s;
   padding: 3px;
 }
@@ -25,11 +25,29 @@ p {
 h1 {
   font-size: 2rem;
   line-height: 1.5;
-  color: hsla(160, 100%, 37%, 1);
+  color: var(--advice-color-green);
 }
 h2 {
   font-size: 1.5rem;
   line-height: 1.5;
+}
+
+.mensagem-sucesso{
+    margin-left: 15px;
+    width: 93%;
+    border-radius: 5px;
+    padding: 15px;
+    text-align: center;
+    background-color: var(--advice-color);
+}
+
+.mensagem-error{
+  margin-left: 15px;
+  width: 93%;
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
+  background-color: var(--advice-color-red);
 }
 
 @media (hover: hover) {
